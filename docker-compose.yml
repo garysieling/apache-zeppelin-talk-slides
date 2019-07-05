@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  slides:
+    image: ws
+    ports:
+      - 9000:8080
+    volumes:
+      - .:/src
+  server:
+    image: zeppelin
+    environment:
+      ZEPPELIN_PORT: 8080
+      ZEPPELIN_JAVA_OPTS: >-
+        -Dspark.driver.memory=1g
+        -Dspark.executor.memory=2g
+      MASTER: local[*]
+    ports:
+      - 8080:8080
+    volumes:
+      - ./confusion/notebooks:/zeppelin/notebook
+      - ./confusion/data:/data
+

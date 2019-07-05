@@ -1,0 +1,72 @@
+{
+  "paragraphs": [
+    {
+      "text": "%sh\n\nls $ZEPPELIN_HOME/notebook\n\nID\u003d2E3J7UQ4F\n\ncurl -o  /tmp/note.json https://raw.githubusercontent.com/garysieling/sagemaker-object-detection-scala/master/docker/notebook/$ID/note.json \n\ncurl -vX POST http://localhost:8080/api/notebook/import -d @/tmp/note.json --header \"Content-Type: application/json\"\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-11 18:08:17.867",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "2BEQV7PZ5\n2E3J7UQ4F\n2E9NMGXJZ\n2EA7W5YTN\n2ED2VTNRX\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0\r100 30494  100 30494    0     0  27476      0  0:00:01  0:00:01 --:--:-- 27496\nNote: Unnecessary use of -X or --request, POST is already inferred.\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 127.0.0.1...\n* Connected to localhost (127.0.0.1) port 8080 (#0)\n\u003e POST /api/notebook/import HTTP/1.1\r\n\u003e Host: localhost:8080\r\n\u003e User-Agent: curl/7.47.0\r\n\u003e Accept: */*\r\n\u003e Content-Type: application/json\r\n\u003e Content-Length: 29866\r\n\u003e Expect: 100-continue\r\n\u003e \r\n\u003c HTTP/1.1 100 Continue\r\n} [16384 bytes data]\n* We are completely uploaded and fine\n{\"status\":\"OK\",\"message\":\"\",\"body\":\"2EC4TJBGT\"}\u003c HTTP/1.1 200 OK\r\n\u003c Date: Saturday, May 11, 2019 6:08:08 PM UTC\r\n\u003c Access-Control-Allow-Credentials: true\r\n\u003c Access-Control-Allow-Headers: authorization,Content-Type\r\n\u003c Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, HEAD, DELETE\r\n\u003c X-FRAME-OPTIONS: SAMEORIGIN\r\n\u003c X-XSS-Protection: 1\r\n\u003c Content-Type: application/json\r\n\u003c Content-Length: 47\r\n\u003c Server: Jetty(9.4.14.v20181114)\r\n\u003c \r\n{ [47 bytes data]\n\r100 29913  100    47  100 29866    141  89822 --:--:-- --:--:-- --:--:-- 89957\n* Connection #0 to host localhost left intact\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1557597814727_-895897219",
+      "id": "20190511-180334_2061959154",
+      "dateCreated": "2019-05-11 18:03:34.727",
+      "dateStarted": "2019-05-11 18:08:07.571",
+      "dateFinished": "2019-05-11 18:08:09.081",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-11 18:03:45.500",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1557597825496_1187451982",
+      "id": "20190511-180345_542230204",
+      "dateCreated": "2019-05-11 18:03:45.496",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Pull",
+  "id": "2E9NMGXJZ",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "python:shared_process": [],
+    "sh:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

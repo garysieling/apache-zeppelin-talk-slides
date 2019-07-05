@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  server:
+    image: zeppelin
+    environment:
+      ZEPPELIN_PORT: 8080
+      ZEPPELIN_JAVA_OPTS: >-
+        -Dspark.driver.memory=1g
+        -Dspark.executor.memory=2g
+      MASTER: local[*]
+    ports:
+      - 8080:8080
+    volumes:
+      - ./notebooks:/zeppelin/notebook
+      - ./data:/data
+

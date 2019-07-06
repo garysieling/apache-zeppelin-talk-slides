@@ -1,6 +1,22 @@
 {
   "paragraphs": [
     {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-06 12:49:02.687",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1562417342683_-2086933672",
+      "id": "20190706-124902_1369877788",
+      "dateCreated": "2019-07-06 12:49:02.683",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
       "text": " %python\n\nprint(\"%html \u003ciframe width\u003d\\\"560\\\" height\u003d\\\"315\\\" src\u003d\\\"https://www.youtube.com/embed/YJ4d-nOf7cI\\\" frameborder\u003d\\\"0\\\" allow\u003d\\\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen\u003e\u003c/iframe\u003e\")",
       "user": "anonymous",
       "dateUpdated": "2019-05-30 00:53:37.856",
@@ -78,7 +94,7 @@
     {
       "text": "%sh\n\nyoutube-dl -F  \"https://www.youtube.com/watch?v\u003dYJ4d-nOf7cI\"",
       "user": "anonymous",
-      "dateUpdated": "2019-05-30 00:53:46.964",
+      "dateUpdated": "2019-07-06 12:56:39.766",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -90,7 +106,9 @@
           "completionKey": "TAB",
           "completionSupport": false
         },
-        "editorMode": "ace/mode/sh"
+        "editorMode": "ace/mode/sh",
+        "editorHide": true,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -1351,8 +1369,9 @@
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {
+    "md:shared_process": [],
     "python:shared_process": [],
-    "spark:shared_process": []
+    "sh:shared_process": []
   },
   "config": {
     "isZeppelinNotebookCronEnable": false

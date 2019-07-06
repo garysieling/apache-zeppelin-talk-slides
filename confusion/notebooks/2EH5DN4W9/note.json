@@ -446,7 +446,7 @@
     {
       "text": "%python\nprint(\"%table\")\nprint(\"\"\"Header 1\\tHeader 2\na\\t1\nb\\t2\nc\\t3\"\"\")\n",
       "user": "anonymous",
-      "dateUpdated": "2019-07-06 17:15:50.439",
+      "dateUpdated": "2019-07-06 17:30:19.280",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -611,12 +611,7 @@
   "id": "2EH5DN4W9",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {
-    "md:shared_process": [],
-    "python:shared_process": [],
-    "sh:shared_process": [],
-    "spark:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "isZeppelinNotebookCronEnable": false,
     "looknfeel": "default",

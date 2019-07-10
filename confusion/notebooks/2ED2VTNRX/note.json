@@ -3,7 +3,7 @@
     {
       "text": "%md\nIdentifying household objects\n- Reverse image search\n- Classification, Object Detection, Segmentation\n- Either way, no good datasets\n- Stock video gets a lot of images fast (pan / zoom / lighting)\n- Curated tags (see: copper pipes, cherry, asbestos, standing water)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-10 02:25:40.955",
+      "dateUpdated": "2019-07-10 02:31:01.614",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -36,8 +36,8 @@
       "jobName": "paragraph_1562725245478_1406023834",
       "id": "20190710-022045_1868888978",
       "dateCreated": "2019-07-10 02:20:45.478",
-      "dateStarted": "2019-07-10 02:25:40.955",
-      "dateFinished": "2019-07-10 02:25:40.964",
+      "dateStarted": "2019-07-10 02:31:01.614",
+      "dateFinished": "2019-07-10 02:31:01.620",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -79,6 +79,47 @@
       "dateCreated": "2019-05-11 17:34:51.749",
       "dateStarted": "2019-05-30 00:53:37.908",
       "dateFinished": "2019-05-30 00:53:37.915",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \nDesign:\n- A big table of images\n- Folder paths are our metadata (product + purpose + tag)\n- ETL to convert images -\u003e model\n\nGoals:\n- Instrumentation / repeatability for each step\n- Scientific validity (memorization vs. generalization)\n- Tune the model by getting more images (different lighting, brands)\n- Updatable model",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-10 02:33:36.196",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eDesign:\u003cbr/\u003e- A big table of images\u003cbr/\u003e- Folder paths are our metadata (product + purpose + tag)\u003cbr/\u003e- ETL to convert images -\u0026gt; model\u003c/p\u003e\n\u003cp\u003eGoals:\u003cbr/\u003e- Instrumentation / repeatability for each step\u003cbr/\u003e- Scientific validity (memorization vs. generalization)\u003cbr/\u003e- Tune the model by getting more images (different lighting, brands)\u003cbr/\u003e- Updatable model\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562725678290_-1013424913",
+      "id": "20190710-022758_1457951518",
+      "dateCreated": "2019-07-10 02:27:58.290",
+      "dateStarted": "2019-07-10 02:33:36.197",
+      "dateFinished": "2019-07-10 02:33:36.201",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

@@ -1,6 +1,47 @@
 {
   "paragraphs": [
     {
+      "text": "%md\nIdentifying household objects\n- Reverse image search\n- Classification, Object Detection, Segmentation\n- Either way, no good datasets\n- Stock video gets a lot of images fast (pan / zoom / lighting)\n- Curated tags (see: copper pipes, cherry, asbestos, standing water)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-10 02:25:40.955",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eIdentifying household objects\u003cbr/\u003e- Reverse image search\u003cbr/\u003e- Classification, Object Detection, Segmentation\u003cbr/\u003e- Either way, no good datasets\u003cbr/\u003e- Stock video gets a lot of images fast (pan / zoom / lighting)\u003cbr/\u003e- Curated tags (see: copper pipes, cherry, asbestos, standing water)\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562725245478_1406023834",
+      "id": "20190710-022045_1868888978",
+      "dateCreated": "2019-07-10 02:20:45.478",
+      "dateStarted": "2019-07-10 02:25:40.955",
+      "dateFinished": "2019-07-10 02:25:40.964",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
       "text": "%python\n\nprint(\"%html \u003ciframe width\u003d\\\"560\\\" height\u003d\\\"315\\\" src\u003d\\\"https://www.youtube.com/embed/YJ4d-nOf7cI\\\" frameborder\u003d\\\"0\\\" allow\u003d\\\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen\u003e\u003c/iframe\u003e\")",
       "user": "anonymous",
       "dateUpdated": "2019-07-06 17:32:08.859",

@@ -2,6 +2,7 @@
 *.iml
 *.iws
 *.eml
+.aws/*
 out/
 .DS_Store
 .svn
@@ -13,3 +14,4 @@ css/reveal.min.css
 js/reveal.min.js
 *.swo
 *.swp
+confusion/data/**

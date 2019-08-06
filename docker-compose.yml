@@ -20,4 +20,5 @@ services:
     volumes:
       - ./confusion/notebooks:/zeppelin/notebook
       - ./confusion/data:/data
+      - ./images/:/images
 

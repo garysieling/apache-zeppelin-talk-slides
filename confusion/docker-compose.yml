@@ -14,4 +14,6 @@ services:
     volumes:
       - ./notebooks:/zeppelin/notebook
       - ./data:/data
+      - ./images:/images
+      - ./.aws:/root/.aws
 

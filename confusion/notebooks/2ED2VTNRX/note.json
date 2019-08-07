@@ -1869,9 +1869,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%sh\n\nrm -rf /data/household/demo/\nmkdir -p /data/household/demo/before\nmkdir -p /data/household/demo/after\n\nyoutube-dl -f 135 -o \"/data/demo_before.mp4\" \"https://www.youtube.com/watch?v\u003dm3AchdLdp0A\"\n\nffmpeg -i /data/demo_before.mp4 /data/household/demo/before/frames-%04d.jpg -hide_banner",
+      "text": "%sh\n\nrm -rf /data/household/demo/\nmkdir -p /data/household/demo/before\nmkdir -p /data/household/demo/after\nmkdir -p /data/household/demo/after-avg\n\nyoutube-dl -f 135 -o \"/data/demo_before.mp4\" \"https://www.youtube.com/watch?v\u003dm3AchdLdp0A\"\n\nffmpeg -i /data/demo_before.mp4 /data/household/demo/before/frames-%04d.jpg -hide_banner",
       "user": "anonymous",
-      "dateUpdated": "2019-07-10 12:48:22.376",
+      "dateUpdated": "2019-08-07 02:00:04.020",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1883,7 +1883,8 @@
           "completionKey": "TAB",
           "completionSupport": false
         },
-        "editorMode": "ace/mode/sh"
+        "editorMode": "ace/mode/sh",
+        "editorHide": false
       },
       "settings": {
         "params": {},
@@ -1894,7 +1895,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "[youtube] m3AchdLdp0A: Downloading webpage\n[youtube] m3AchdLdp0A: Downloading video info webpage\n[youtube] m3AchdLdp0A: Downloading MPD manifest\n[download] /data/demo_before.mp4 has already been downloaded\n\r[download] 100% of 922.60KiB\nInput #0, mov,mp4,m4a,3gp,3g2,mj2, from \u0027/data/demo_before.mp4\u0027:\n  Metadata:\n    major_brand     : dash\n    minor_version   : 0\n    compatible_brands: iso6avc1mp41\n    creation_time   : 2019-07-10 00:53:15\n  Duration: 00:00:20.52, start: 0.000000, bitrate: 368 kb/s\n    Stream #0:0(und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p, 270x480 [SAR 1:1 DAR 9:16], 364 kb/s, 29.93 fps, 29.92 tbr, 90k tbn, 59.86 tbc (default)\n    Metadata:\n      creation_time   : 2019-07-10 00:53:15\n      handler_name    : ISO Media file produced by Google Inc. Created on: 07/09/2019.\n[swscaler @ 0x2010be0] deprecated pixel format used, make sure you did set range correctly\nOutput #0, image2, to \u0027/data/household/demo/before/frames-%04d.jpg\u0027:\n  Metadata:\n    major_brand     : dash\n    minor_version   : 0\n    compatible_brands: iso6avc1mp41\n    encoder         : Lavf56.40.101\n    Stream #0:0(und): Video: mjpeg, yuvj420p(pc), 270x480 [SAR 1:1 DAR 9:16], q\u003d2-31, 200 kb/s, 29.92 fps, 29.92 tbn, 29.92 tbc (default)\n    Metadata:\n      creation_time   : 2019-07-10 00:53:15\n      handler_name    : ISO Media file produced by Google Inc. Created on: 07/09/2019.\n      encoder         : Lavc56.60.100 mjpeg\nStream mapping:\n  Stream #0:0 -\u003e #0:0 (h264 (native) -\u003e mjpeg (native))\nPress [q] to stop, [?] for help\nframe\u003d  605 fps\u003d0.0 q\u003d24.8 size\u003dN/A time\u003d00:00:20.22 bitrate\u003dN/A    \rframe\u003d  614 fps\u003d0.0 q\u003d24.8 Lsize\u003dN/A time\u003d00:00:20.52 bitrate\u003dN/A    \nvideo:3278kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown\n"
+            "data": "[youtube] m3AchdLdp0A: Downloading webpage\n[youtube] m3AchdLdp0A: Downloading video info webpage\n[youtube] m3AchdLdp0A: Downloading MPD manifest\n[download] /data/demo_before.mp4 has already been downloaded\n\r[download] 100% of 922.60KiB\nInput #0, mov,mp4,m4a,3gp,3g2,mj2, from \u0027/data/demo_before.mp4\u0027:\n  Metadata:\n    major_brand     : dash\n    minor_version   : 0\n    compatible_brands: iso6avc1mp41\n    creation_time   : 2019-07-10 00:53:15\n  Duration: 00:00:20.52, start: 0.000000, bitrate: 368 kb/s\n    Stream #0:0(und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p, 270x480 [SAR 1:1 DAR 9:16], 364 kb/s, 29.93 fps, 29.92 tbr, 90k tbn, 59.86 tbc (default)\n    Metadata:\n      creation_time   : 2019-07-10 00:53:15\n      handler_name    : ISO Media file produced by Google Inc. Created on: 07/09/2019.\n[swscaler @ 0x2608be0] deprecated pixel format used, make sure you did set range correctly\nOutput #0, image2, to \u0027/data/household/demo/before/frames-%04d.jpg\u0027:\n  Metadata:\n    major_brand     : dash\n    minor_version   : 0\n    compatible_brands: iso6avc1mp41\n    encoder         : Lavf56.40.101\n    Stream #0:0(und): Video: mjpeg, yuvj420p(pc), 270x480 [SAR 1:1 DAR 9:16], q\u003d2-31, 200 kb/s, 29.92 fps, 29.92 tbn, 29.92 tbc (default)\n    Metadata:\n      creation_time   : 2019-07-10 00:53:15\n      handler_name    : ISO Media file produced by Google Inc. Created on: 07/09/2019.\n      encoder         : Lavc56.60.100 mjpeg\nStream mapping:\n  Stream #0:0 -\u003e #0:0 (h264 (native) -\u003e mjpeg (native))\nPress [q] to stop, [?] for help\nframe\u003d  614 fps\u003d0.0 q\u003d24.8 Lsize\u003dN/A time\u003d00:00:20.52 bitrate\u003dN/A    \nvideo:3278kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown\n"
           }
         ]
       },
@@ -1902,15 +1903,90 @@
       "jobName": "paragraph_1562719113945_893531293",
       "id": "20190710-003833_941800392",
       "dateCreated": "2019-07-10 00:38:33.945",
-      "dateStarted": "2019-07-10 12:48:22.403",
-      "dateFinished": "2019-07-10 12:48:24.839",
+      "dateStarted": "2019-08-07 02:00:04.049",
+      "dateFinished": "2019-08-07 02:00:06.386",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%python\n\nimport matplotlib.pyplot as plt\nimport cv2\n\ndef get_label_and_prod(out):\n  labels \u003d [a for a in category_to_idx.keys()]\n  pred \u003d int(nd.argmax(out, axis\u003d1).asscalar())\n  maxval \u003d nd.max(out, axis\u003d1).asscalar()\n\n  return pred, labels[pred], maxval\n\ndef predict_class(net, fname):\n  with open(\"/data/household/demo/before/\" + fname, \u0027rb\u0027) as f:\n    img \u003d image.imdecode(f.read())\n    data, _ \u003d transform(img, -1, test_augs)\n    \n    data \u003d data.expand_dims(axis\u003d0)\n    data \u003d color_normalize(data/255,\n      mean \u003d nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),\n      std \u003d nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))\n    \n    out \u003d net(data.as_in_context(mxnet.cpu()))\n    pred, label, maxval \u003d get_label_and_prod(out)\n    \n    if maxval \u003e 3:\n      img \u003d cv2.putText(img.asnumpy(), label, (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.25, (255, 255, 255, 255), 2)\n    else:\n      img \u003d img.asnumpy()\n    \n    cv2.imwrite(\"/data/household/demo/after/\" + fname, img)\n    \nfor filename in os.listdir(\"/data/household/demo/before/\"):\n  if filename.endswith(\".jpg\"):\n    predict_class(net, filename)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-10 01:37:34.889",
+      "dateUpdated": "2019-08-07 02:11:10.537",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1562687333515_1641902074",
+      "id": "20190709-154853_1737147588",
+      "dateCreated": "2019-07-09 15:48:53.515",
+      "dateStarted": "2019-08-07 02:11:10.565",
+      "dateFinished": "2019-08-07 02:11:37.478",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\n\nrm -rf /data/demo_after.mp4\nffmpeg -r 20 -f image2 -i /data/household/demo/after/frames-%04d.jpg -vcodec libx264 -crf 25  -pix_fmt yuv420p /data/demo_after.mp4",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-07 02:11:39.897",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/sh",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "ffmpeg version 2.8.15-0ubuntu0.16.04.1 Copyright (c) 2000-2018 the FFmpeg developers\n  built with gcc 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.10) 20160609\n  configuration: --prefix\u003d/usr --extra-version\u003d0ubuntu0.16.04.1 --build-suffix\u003d-ffmpeg --toolchain\u003dhardened --libdir\u003d/usr/lib/x86_64-linux-gnu --incdir\u003d/usr/include/x86_64-linux-gnu --cc\u003dcc --cxx\u003dg++ --enable-gpl --enable-shared --disable-stripping --disable-decoder\u003dlibopenjpeg --disable-decoder\u003dlibschroedinger --enable-avresample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libmodplug --enable-libmp3lame --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-librtmp --enable-libschroedinger --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxvid --enable-libzvbi --enable-openal --enable-opengl --enable-x11grab --enable-libdc1394 --enable-libiec61883 --enable-libzmq --enable-frei0r --enable-libx264 --enable-libopencv\n  libavutil      54. 31.100 / 54. 31.100\n  libavcodec     56. 60.100 / 56. 60.100\n  libavformat    56. 40.101 / 56. 40.101\n  libavdevice    56.  4.100 / 56.  4.100\n  libavfilter     5. 40.101 /  5. 40.101\n  libavresample   2.  1.  0 /  2.  1.  0\n  libswscale      3.  1.101 /  3.  1.101\n  libswresample   1.  2.101 /  1.  2.101\n  libpostproc    53.  3.100 / 53.  3.100\n[mjpeg @ 0x71a9a0] Changeing bps to 8\nInput #0, image2, from \u0027/data/household/demo/after/frames-%04d.jpg\u0027:\n  Duration: 00:00:30.70, start: 0.000000, bitrate: N/A\n    Stream #0:0: Video: mjpeg, yuvj420p(pc, bt470bg/unknown/unknown), 270x480 [SAR 1:1 DAR 9:16], 20 fps, 20 tbr, 20 tbn, 20 tbc\n[swscaler @ 0x733500] deprecated pixel format used, make sure you did set range correctly\n[libx264 @ 0x7201a0] using SAR\u003d1/1\n[libx264 @ 0x7201a0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 AVX2 LZCNT BMI2\n[libx264 @ 0x7201a0] profile High, level 2.1\n[libx264 @ 0x7201a0] 264 - core 148 r2643 5c65704 - H.264/MPEG-4 AVC codec - Copyleft 2003-2015 - http://www.videolan.org/x264.html - options: cabac\u003d1 ref\u003d3 deblock\u003d1:0:0 analyse\u003d0x3:0x113 me\u003dhex subme\u003d7 psy\u003d1 psy_rd\u003d1.00:0.00 mixed_ref\u003d1 me_range\u003d16 chroma_me\u003d1 trellis\u003d1 8x8dct\u003d1 cqm\u003d0 deadzone\u003d21,11 fast_pskip\u003d1 chroma_qp_offset\u003d-2 threads\u003d15 lookahead_threads\u003d2 sliced_threads\u003d0 nr\u003d0 decimate\u003d1 interlaced\u003d0 bluray_compat\u003d0 constrained_intra\u003d0 bframes\u003d3 b_pyramid\u003d2 b_adapt\u003d1 b_bias\u003d0 direct\u003d1 weightb\u003d1 open_gop\u003d0 weightp\u003d2 keyint\u003d250 keyint_min\u003d20 scenecut\u003d40 intra_refresh\u003d0 rc_lookahead\u003d40 rc\u003dcrf mbtree\u003d1 crf\u003d25.0 qcomp\u003d0.60 qpmin\u003d0 qpmax\u003d69 qpstep\u003d4 ip_ratio\u003d1.40 aq\u003d1:1.00\nOutput #0, mp4, to \u0027/data/demo_after.mp4\u0027:\n  Metadata:\n    encoder         : Lavf56.40.101\n    Stream #0:0: Video: h264 (libx264) ([33][0][0][0] / 0x0021), yuv420p, 270x480 [SAR 1:1 DAR 9:16], q\u003d-1--1, 20 fps, 10240 tbn, 20 tbc\n    Metadata:\n      encoder         : Lavc56.60.100 libx264\nStream mapping:\n  Stream #0:0 -\u003e #0:0 (mjpeg (native) -\u003e h264 (libx264))\nPress [q] to stop, [?] for help\nframe\u003d  240 fps\u003d0.0 q\u003d30.0 size\u003d     562kB time\u003d00:00:08.95 bitrate\u003d 514.7kbits/s    \rframe\u003d  439 fps\u003d438 q\u003d30.0 size\u003d    1176kB time\u003d00:00:18.90 bitrate\u003d 509.6kbits/s    \rframe\u003d  614 fps\u003d394 q\u003d-1.0 Lsize\u003d    2016kB time\u003d00:00:30.60 bitrate\u003d 539.6kbits/s    \nvideo:2008kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.387335%\n[libx264 @ 0x7201a0] frame I:3     Avg QP:25.10  size:  5165\n[libx264 @ 0x7201a0] frame P:331   Avg QP:27.16  size:  3944\n[libx264 @ 0x7201a0] frame B:280   Avg QP:29.00  size:  2624\n[libx264 @ 0x7201a0] consecutive B-frames:  9.3% 89.3%  1.5%  0.0%\n[libx264 @ 0x7201a0] mb I  I16..4: 23.7% 73.9%  2.4%\n[libx264 @ 0x7201a0] mb P  I16..4: 17.1% 63.9%  1.5%  P16..4:  7.4%  5.1%  3.2%  0.0%  0.0%    skip: 1.9%\n[libx264 @ 0x7201a0] mb B  I16..4:  7.7% 37.3%  0.2%  B16..8: 12.7%  8.5%  4.2%  direct: 8.4%  skip:21.1%  L0:45.2% L1:37.3% BI:17.5%\n[libx264 @ 0x7201a0] 8x8 transform intra:79.1% inter:76.9%\n[libx264 @ 0x7201a0] coded y,uvDC,uvAC intra: 63.6% 54.6% 0.8% inter: 39.2% 15.7% 0.2%\n[libx264 @ 0x7201a0] i16 v,h,dc,p: 38% 31% 30%  2%\n[libx264 @ 0x7201a0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 23% 22% 41%  3%  1%  1%  1%  2%  5%\n[libx264 @ 0x7201a0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 33% 25% 15%  4%  4%  4%  6%  5%  4%\n[libx264 @ 0x7201a0] i8c dc,h,v,p: 49% 24% 25%  1%\n[libx264 @ 0x7201a0] Weighted P-Frames: Y:17.5% UV:1.8%\n[libx264 @ 0x7201a0] ref P L0: 53.6% 17.4% 18.6%  9.2%  1.2%\n[libx264 @ 0x7201a0] ref B L0: 83.9% 16.1%  0.0%\n[libx264 @ 0x7201a0] ref B L1: 99.8%  0.2%\n[libx264 @ 0x7201a0] kb/s:535.61\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562720486806_1839253165",
+      "id": "20190710-010126_828536640",
+      "dateCreated": "2019-07-10 01:01:26.806",
+      "dateStarted": "2019-08-07 02:11:39.934",
+      "dateFinished": "2019-08-07 02:11:41.542",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\n\nimport mxnet\nimport matplotlib.pyplot as plt\nimport cv2\n\ndef get_label_and_prod(out):\n  labels \u003d [a for a in category_to_idx.keys()]\n  pred \u003d int(nd.argmax(out, axis\u003d1).asscalar())\n  maxval \u003d nd.max(out, axis\u003d1).asscalar()\n\n  return pred, labels[pred], maxval\n\ntrailing \u003d []\n\ndef predict_class(net, fname):\n  with open(\"/data/household/demo/before/\" + fname, \u0027rb\u0027) as f:\n    img \u003d image.imdecode(f.read())\n    data, _ \u003d transform(img, -1, test_augs)\n    \n    data \u003d data.expand_dims(axis\u003d0)\n    data \u003d color_normalize(data/255,\n      mean \u003d nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),\n      std \u003d nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))\n    \n    out \u003d net(data.as_in_context(mxnet.cpu()))\n    pred, label, maxval \u003d get_label_and_prod(out)\n    \n    if maxval \u003e 3:\n      predictions \u003d {}\n      predictions[label] \u003d maxval\n      for history in trailing:\n        if history[0] in predictions:\n          predictions[history[0]] \u003d predictions[history[0]] + history[1]\n        else:\n          predictions[history[0]] \u003d history[1]\n          \n      maximum \u003d max(predictions, key\u003dpredictions.get)\n\n      img \u003d cv2.putText(img.asnumpy(), maximum, (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.25, (255, 255, 255, 255), 2)\n        \n      trailing.append((label, maxval))\n    else:\n      img \u003d img.asnumpy()\n      trailing.append((\u0027nothing\u0027, maxval))\n    \n    \n    if len(trailing) \u003e 5:\n        trailing.pop(0)\n    \n    cv2.imwrite(\"/data/household/demo/after-avg/\" + fname, img)\n    \nfor filename in os.listdir(\"/data/household/demo/before/\"):\n  if filename.endswith(\".jpg\"):\n    predict_class(net, filename)",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-07 02:17:08.395",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1933,18 +2009,18 @@
         "msg": []
       },
       "apps": [],
-      "jobName": "paragraph_1562687333515_1641902074",
-      "id": "20190709-154853_1737147588",
-      "dateCreated": "2019-07-09 15:48:53.515",
-      "dateStarted": "2019-07-10 01:37:34.911",
-      "dateFinished": "2019-07-10 01:38:03.322",
+      "jobName": "paragraph_1565143103083_410212113",
+      "id": "20190807-015823_971423715",
+      "dateCreated": "2019-08-07 01:58:23.083",
+      "dateStarted": "2019-08-07 02:17:08.425",
+      "dateFinished": "2019-08-07 02:17:44.368",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%sh\n\nrm -rf /data/demo_after.mp4\nffmpeg -r 20 -f image2 -i /data/household/demo/after/frames-%04d.jpg -vcodec libx264 -crf 25  -pix_fmt yuv420p /data/demo_after.mp4",
+      "text": "%sh\n\nrm -rf /data/demo_after-avg.mp4\nffmpeg -r 20 -f image2 -i /data/household/demo/after-avg/frames-%04d.jpg -vcodec libx264 -crf 25  -pix_fmt yuv420p /data/demo_after-avg.mp4",
       "user": "anonymous",
-      "dateUpdated": "2019-07-10 01:37:03.199",
+      "dateUpdated": "2019-08-07 02:12:08.902",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1967,16 +2043,16 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "ffmpeg version 2.8.15-0ubuntu0.16.04.1 Copyright (c) 2000-2018 the FFmpeg developers\n  built with gcc 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.10) 20160609\n  configuration: --prefix\u003d/usr --extra-version\u003d0ubuntu0.16.04.1 --build-suffix\u003d-ffmpeg --toolchain\u003dhardened --libdir\u003d/usr/lib/x86_64-linux-gnu --incdir\u003d/usr/include/x86_64-linux-gnu --cc\u003dcc --cxx\u003dg++ --enable-gpl --enable-shared --disable-stripping --disable-decoder\u003dlibopenjpeg --disable-decoder\u003dlibschroedinger --enable-avresample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libmodplug --enable-libmp3lame --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-librtmp --enable-libschroedinger --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxvid --enable-libzvbi --enable-openal --enable-opengl --enable-x11grab --enable-libdc1394 --enable-libiec61883 --enable-libzmq --enable-frei0r --enable-libx264 --enable-libopencv\n  libavutil      54. 31.100 / 54. 31.100\n  libavcodec     56. 60.100 / 56. 60.100\n  libavformat    56. 40.101 / 56. 40.101\n  libavdevice    56.  4.100 / 56.  4.100\n  libavfilter     5. 40.101 /  5. 40.101\n  libavresample   2.  1.  0 /  2.  1.  0\n  libswscale      3.  1.101 /  3.  1.101\n  libswresample   1.  2.101 /  1.  2.101\n  libpostproc    53.  3.100 / 53.  3.100\n[mjpeg @ 0x8be9a0] Changeing bps to 8\nInput #0, image2, from \u0027/data/household/demo/after/frames-%04d.jpg\u0027:\n  Duration: 00:00:30.70, start: 0.000000, bitrate: N/A\n    Stream #0:0: Video: mjpeg, yuvj420p(pc, bt470bg/unknown/unknown), 270x480 [SAR 1:1 DAR 9:16], 20 fps, 20 tbr, 20 tbn, 20 tbc\n[swscaler @ 0x8d7500] deprecated pixel format used, make sure you did set range correctly\n[libx264 @ 0x8c2500] using SAR\u003d1/1\n[libx264 @ 0x8c2500] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 AVX2 LZCNT BMI2\n[libx264 @ 0x8c2500] profile High, level 2.1\n[libx264 @ 0x8c2500] 264 - core 148 r2643 5c65704 - H.264/MPEG-4 AVC codec - Copyleft 2003-2015 - http://www.videolan.org/x264.html - options: cabac\u003d1 ref\u003d3 deblock\u003d1:0:0 analyse\u003d0x3:0x113 me\u003dhex subme\u003d7 psy\u003d1 psy_rd\u003d1.00:0.00 mixed_ref\u003d1 me_range\u003d16 chroma_me\u003d1 trellis\u003d1 8x8dct\u003d1 cqm\u003d0 deadzone\u003d21,11 fast_pskip\u003d1 chroma_qp_offset\u003d-2 threads\u003d15 lookahead_threads\u003d2 sliced_threads\u003d0 nr\u003d0 decimate\u003d1 interlaced\u003d0 bluray_compat\u003d0 constrained_intra\u003d0 bframes\u003d3 b_pyramid\u003d2 b_adapt\u003d1 b_bias\u003d0 direct\u003d1 weightb\u003d1 open_gop\u003d0 weightp\u003d2 keyint\u003d250 keyint_min\u003d20 scenecut\u003d40 intra_refresh\u003d0 rc_lookahead\u003d40 rc\u003dcrf mbtree\u003d1 crf\u003d25.0 qcomp\u003d0.60 qpmin\u003d0 qpmax\u003d69 qpstep\u003d4 ip_ratio\u003d1.40 aq\u003d1:1.00\nOutput #0, mp4, to \u0027/data/demo_after.mp4\u0027:\n  Metadata:\n    encoder         : Lavf56.40.101\n    Stream #0:0: Video: h264 (libx264) ([33][0][0][0] / 0x0021), yuv420p, 270x480 [SAR 1:1 DAR 9:16], q\u003d-1--1, 20 fps, 10240 tbn, 20 tbc\n    Metadata:\n      encoder         : Lavc56.60.100 libx264\nStream mapping:\n  Stream #0:0 -\u003e #0:0 (mjpeg (native) -\u003e h264 (libx264))\nPress [q] to stop, [?] for help\nframe\u003d  235 fps\u003d0.0 q\u003d30.0 size\u003d     555kB time\u003d00:00:08.70 bitrate\u003d 522.4kbits/s    \rframe\u003d  438 fps\u003d436 q\u003d30.0 size\u003d    1187kB time\u003d00:00:18.85 bitrate\u003d 516.1kbits/s    \rframe\u003d  614 fps\u003d390 q\u003d-1.0 Lsize\u003d    2034kB time\u003d00:00:30.60 bitrate\u003d 544.7kbits/s    \nvideo:2027kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.385868%\n[libx264 @ 0x8c2500] frame I:4     Avg QP:24.92  size:  5245\n[libx264 @ 0x8c2500] frame P:328   Avg QP:27.18  size:  3987\n[libx264 @ 0x8c2500] frame B:282   Avg QP:29.03  size:  2646\n[libx264 @ 0x8c2500] consecutive B-frames:  8.3% 91.2%  0.5%  0.0%\n[libx264 @ 0x8c2500] mb I  I16..4: 22.9% 74.1%  3.0%\n[libx264 @ 0x8c2500] mb P  I16..4: 16.9% 63.5%  1.6%  P16..4:  7.6%  5.1%  3.4%  0.0%  0.0%    skip: 1.9%\n[libx264 @ 0x8c2500] mb B  I16..4:  7.6% 37.0%  0.3%  B16..8: 12.8%  8.5%  4.3%  direct: 8.6%  skip:21.0%  L0:44.9% L1:37.6% BI:17.5%\n[libx264 @ 0x8c2500] 8x8 transform intra:79.0% inter:76.7%\n[libx264 @ 0x8c2500] coded y,uvDC,uvAC intra: 63.7% 54.8% 0.9% inter: 39.6% 15.8% 0.3%\n[libx264 @ 0x8c2500] i16 v,h,dc,p: 38% 31% 29%  2%\n[libx264 @ 0x8c2500] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 23% 22% 41%  3%  1%  1%  1%  2%  5%\n[libx264 @ 0x8c2500] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 34% 25% 15%  3%  5%  4%  5%  5%  4%\n[libx264 @ 0x8c2500] i8c dc,h,v,p: 49% 24% 25%  1%\n[libx264 @ 0x8c2500] Weighted P-Frames: Y:18.3% UV:2.4%\n[libx264 @ 0x8c2500] ref P L0: 53.3% 17.6% 18.3%  9.3%  1.5%\n[libx264 @ 0x8c2500] ref B L0: 84.0% 16.0%\n[libx264 @ 0x8c2500] ref B L1: 100.0%  0.0%\n[libx264 @ 0x8c2500] kb/s:540.62\n"
+            "data": "ffmpeg version 2.8.15-0ubuntu0.16.04.1 Copyright (c) 2000-2018 the FFmpeg developers\n  built with gcc 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.10) 20160609\n  configuration: --prefix\u003d/usr --extra-version\u003d0ubuntu0.16.04.1 --build-suffix\u003d-ffmpeg --toolchain\u003dhardened --libdir\u003d/usr/lib/x86_64-linux-gnu --incdir\u003d/usr/include/x86_64-linux-gnu --cc\u003dcc --cxx\u003dg++ --enable-gpl --enable-shared --disable-stripping --disable-decoder\u003dlibopenjpeg --disable-decoder\u003dlibschroedinger --enable-avresample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libmodplug --enable-libmp3lame --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-librtmp --enable-libschroedinger --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxvid --enable-libzvbi --enable-openal --enable-opengl --enable-x11grab --enable-libdc1394 --enable-libiec61883 --enable-libzmq --enable-frei0r --enable-libx264 --enable-libopencv\n  libavutil      54. 31.100 / 54. 31.100\n  libavcodec     56. 60.100 / 56. 60.100\n  libavformat    56. 40.101 / 56. 40.101\n  libavdevice    56.  4.100 / 56.  4.100\n  libavfilter     5. 40.101 /  5. 40.101\n  libavresample   2.  1.  0 /  2.  1.  0\n  libswscale      3.  1.101 /  3.  1.101\n  libswresample   1.  2.101 /  1.  2.101\n  libpostproc    53.  3.100 / 53.  3.100\n[mjpeg @ 0x17159a0] Changeing bps to 8\nInput #0, image2, from \u0027/data/household/demo/after-avg/frames-%04d.jpg\u0027:\n  Duration: 00:00:30.70, start: 0.000000, bitrate: N/A\n    Stream #0:0: Video: mjpeg, yuvj420p(pc, bt470bg/unknown/unknown), 270x480 [SAR 1:1 DAR 9:16], 20 fps, 20 tbr, 20 tbn, 20 tbc\n[swscaler @ 0x172e500] deprecated pixel format used, make sure you did set range correctly\n[libx264 @ 0x171b1a0] using SAR\u003d1/1\n[libx264 @ 0x171b1a0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 AVX2 LZCNT BMI2\n[libx264 @ 0x171b1a0] profile High, level 2.1\n[libx264 @ 0x171b1a0] 264 - core 148 r2643 5c65704 - H.264/MPEG-4 AVC codec - Copyleft 2003-2015 - http://www.videolan.org/x264.html - options: cabac\u003d1 ref\u003d3 deblock\u003d1:0:0 analyse\u003d0x3:0x113 me\u003dhex subme\u003d7 psy\u003d1 psy_rd\u003d1.00:0.00 mixed_ref\u003d1 me_range\u003d16 chroma_me\u003d1 trellis\u003d1 8x8dct\u003d1 cqm\u003d0 deadzone\u003d21,11 fast_pskip\u003d1 chroma_qp_offset\u003d-2 threads\u003d15 lookahead_threads\u003d2 sliced_threads\u003d0 nr\u003d0 decimate\u003d1 interlaced\u003d0 bluray_compat\u003d0 constrained_intra\u003d0 bframes\u003d3 b_pyramid\u003d2 b_adapt\u003d1 b_bias\u003d0 direct\u003d1 weightb\u003d1 open_gop\u003d0 weightp\u003d2 keyint\u003d250 keyint_min\u003d20 scenecut\u003d40 intra_refresh\u003d0 rc_lookahead\u003d40 rc\u003dcrf mbtree\u003d1 crf\u003d25.0 qcomp\u003d0.60 qpmin\u003d0 qpmax\u003d69 qpstep\u003d4 ip_ratio\u003d1.40 aq\u003d1:1.00\nOutput #0, mp4, to \u0027/data/demo_after-avg.mp4\u0027:\n  Metadata:\n    encoder         : Lavf56.40.101\n    Stream #0:0: Video: h264 (libx264) ([33][0][0][0] / 0x0021), yuv420p, 270x480 [SAR 1:1 DAR 9:16], q\u003d-1--1, 20 fps, 10240 tbn, 20 tbc\n    Metadata:\n      encoder         : Lavc56.60.100 libx264\nStream mapping:\n  Stream #0:0 -\u003e #0:0 (mjpeg (native) -\u003e h264 (libx264))\nPress [q] to stop, [?] for help\nframe\u003d  250 fps\u003d0.0 q\u003d30.0 size\u003d     593kB time\u003d00:00:09.45 bitrate\u003d 513.8kbits/s    \rframe\u003d  470 fps\u003d468 q\u003d30.0 size\u003d    1283kB time\u003d00:00:20.45 bitrate\u003d 513.8kbits/s    \rframe\u003d  614 fps\u003d417 q\u003d-1.0 Lsize\u003d    2036kB time\u003d00:00:30.60 bitrate\u003d 544.9kbits/s    \nvideo:2028kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.384513%\n[libx264 @ 0x171b1a0] frame I:4     Avg QP:24.57  size:  4650\n[libx264 @ 0x171b1a0] frame P:329   Avg QP:27.20  size:  3975\n[libx264 @ 0x171b1a0] frame B:281   Avg QP:29.00  size:  2667\n[libx264 @ 0x171b1a0] consecutive B-frames:  9.1% 88.9%  2.0%  0.0%\n[libx264 @ 0x171b1a0] mb I  I16..4: 25.7% 70.7%  3.6%\n[libx264 @ 0x171b1a0] mb P  I16..4: 17.1% 64.0%  1.7%  P16..4:  7.2%  5.0%  3.2%  0.0%  0.0%    skip: 1.7%\n[libx264 @ 0x171b1a0] mb B  I16..4:  7.5% 37.3%  0.4%  B16..8: 12.7%  8.3%  4.2%  direct: 8.3%  skip:21.2%  L0:45.8% L1:37.0% BI:17.2%\n[libx264 @ 0x171b1a0] 8x8 transform intra:78.8% inter:76.6%\n[libx264 @ 0x171b1a0] coded y,uvDC,uvAC intra: 63.8% 54.7% 0.9% inter: 38.9% 15.5% 0.2%\n[libx264 @ 0x171b1a0] i16 v,h,dc,p: 38% 31% 29%  2%\n[libx264 @ 0x171b1a0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 23% 22% 41%  3%  1%  1%  1%  2%  5%\n[libx264 @ 0x171b1a0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 33% 25% 15%  4%  5%  4%  6%  4%  4%\n[libx264 @ 0x171b1a0] i8c dc,h,v,p: 49% 24% 25%  1%\n[libx264 @ 0x171b1a0] Weighted P-Frames: Y:17.9% UV:1.8%\n[libx264 @ 0x171b1a0] ref P L0: 53.3% 16.9% 19.4%  9.3%  1.2%\n[libx264 @ 0x171b1a0] ref B L0: 82.9% 17.0%  0.1%\n[libx264 @ 0x171b1a0] ref B L1: 99.7%  0.3%\n[libx264 @ 0x171b1a0] kb/s:540.90\n"
           }
         ]
       },
       "apps": [],
-      "jobName": "paragraph_1562720486806_1839253165",
-      "id": "20190710-010126_828536640",
-      "dateCreated": "2019-07-10 01:01:26.806",
-      "dateStarted": "2019-07-10 01:37:03.228",
-      "dateFinished": "2019-07-10 01:37:04.846",
+      "jobName": "paragraph_1565143910152_-1939242926",
+      "id": "20190807-021150_1439830904",
+      "dateCreated": "2019-08-07 02:11:50.152",
+      "dateStarted": "2019-08-07 02:12:08.930",
+      "dateFinished": "2019-08-07 02:12:10.459",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

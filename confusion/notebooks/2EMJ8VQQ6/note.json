@@ -1,0 +1,117 @@
+{
+  "paragraphs": [
+    {
+      "text": "%sh\n\nls /data/household/demo/",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-10 15:22:44.962",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "ls: cannot access \u0027/data/household/demo/\u0027: No such file or directory\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "ExitValue: 2"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1565450558552_-742234857",
+      "id": "20190810-152238_726715918",
+      "dateCreated": "2019-08-10 15:22:38.553",
+      "dateStarted": "2019-08-10 15:22:44.967",
+      "dateFinished": "2019-08-10 15:22:44.978",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\n\nimport mxnet\nimport matplotlib.pyplot as plt\nimport cv2\n\ndef get_label_and_prod(out):\n  labels \u003d [a for a in category_to_idx.keys()]\n  pred \u003d int(nd.argmax(out, axis\u003d1).asscalar())\n  maxval \u003d nd.max(out, axis\u003d1).asscalar()\n\n  return pred, labels[pred], maxval\n\ntrailing \u003d []\n\ndef predict_class(net, fname):\n  with open(\"/data/household/demo/before/\" + fname, \u0027rb\u0027) as f:\n    img \u003d image.imdecode(f.read())\n    data, _ \u003d transform(img, -1, test_augs)\n    \n    data \u003d data.expand_dims(axis\u003d0)\n    data \u003d color_normalize(data/255,\n      mean \u003d nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),\n      std \u003d nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))\n    \n    out \u003d net(data.as_in_context(mxnet.cpu()))\n    pred, label, maxval \u003d get_label_and_prod(out)\n    \n    if maxval \u003e 3:\n      predictions \u003d {}\n      predictions[label] \u003d maxval\n      for history in trailing:\n        if history[0] in predictions:\n          predictions[history[0]] \u003d predictions[history[0]] + history[1]\n        else:\n          predictions[history[0]] \u003d history[1]\n          \n      maximum \u003d max(predictions, key\u003dpredictions.get)\n\n      img \u003d cv2.putText(img.asnumpy(), maximum, (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.25, (255, 255, 255, 255), 2)\n        \n      trailing.append((label, maxval))\n    else:\n      img \u003d img.asnumpy()\n      trailing.append((\u0027\u0027, maxval))\n    \n    \n    if len(trailing) \u003e 24:\n        trailing.pop(0)\n    \n    cv2.imwrite(\"/data/household/demo/after-avg/\" + fname, img)\n    \nfor filename in os.listdir(\"/data/household/demo/before/\"):\n  if filename.endswith(\".jpg\"):\n    predict_class(net, filename)",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-10 15:22:38.229",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1565450545483_-1403815694",
+      "id": "20190810-152225_1351832587",
+      "dateCreated": "2019-08-10 15:22:25.483",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nprint(\"%html \")\n\ndef showImage(file: java.io.File) \u003d {\n  import java.io._\n  import java.util._\n  val fis \u003d new FileInputStream(file)\n \n  val data \u003d Array.fill[Byte](file.length.toInt)(0)\n  fis.read(data)\n  fis.close\n \n  val encoded_string \u003d Base64.getEncoder.encodeToString(data)\n  print(\"\u003cimg src\u003d\u0027data:image/jpeg;base64,\" + encoded_string + \"\u0027 style\u003d\u0027float:left;padding:5px;max-height:100px\u0027 /\u003e\")\n}\n\ndef showImages(path: String, num: Int) \u003d {\n  import scala.collection.JavaConversions._\n  import java.util.Base64\n  import java.nio.charset.StandardCharsets\n\n  println(\"\u003ch4\u003eImages\u003c/h4\u003e\")\n  print(\"\u003ch5\u003e\" + path + \"\u003c/h5\u003e\")\n  val files \u003d (new java.io.File(path)).listFiles\n  scala.util.Random.shuffle(files.toList).take(num).map(showImage)\n  \n  {}\n}\n\nval rootPath \u003d \"/data/household/train/\"\nval select \u003d z.select(\"Tag\", (new java.io.File(rootPath).listFiles).map((f) \u003d\u003e (f.toString, f.toString)))\n\nshowImages(select.toString + \"/\", 25)",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-10 15:21:17.005",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1565450447478_-2105497649",
+      "id": "20190810-152047_1906571058",
+      "dateCreated": "2019-08-10 15:20:47.478",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Frame Debugger",
+  "id": "2EMJ8VQQ6",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "python:shared_process": [],
+    "sh:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

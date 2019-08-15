@@ -13,10 +13,6 @@ for root, dirs, files in sorted(os.walk('/data/household/train/')):
       
 print(category_to_idx)
 
-import os
-
-print(category_to_idx)
-
 train_map = {}
 
 for key in category_to_idx:
@@ -46,18 +42,20 @@ counts('/data/household/train/', train_map)
 counts('/data/household/test/', test_map)
 counts('/data/household/validation/', validation_map)
 
-print("%table type\tclass\tcount")
+f = open("/data/classes.tsv", "w")
+print("%table type\tclass\tcount", file=f)
 for k in train_map:
-    print("train\t" + k + "\t" + str(len(train_map[k])))
+    print("train\t" + k + "\t" + str(len(train_map[k])), file=f)
     
 for k in test_map:
-    print("test\t" + k + "\t" + str(len(test_map[k])))
+    print("test\t" + k + "\t" + str(len(test_map[k])), file=f)
     
 for k in validation_map:
-    print("validation\t" + k + "\t" + str(len(validation_map[k])))
+    print("validation\t" + k + "\t" + str(len(validation_map[k])), file=f)
     
 for k in sample_map:
-    print("sample\t" + k + "\t" + str(len(sample_map[k])))    
+    print("sample\t" + k + "\t" + str(len(sample_map[k])), file=f)    
+f.close()
 
 from mxnet.gluon.model_zoo.vision import mobilenet_v2_1_0
 from mxnet.gluon.model_zoo.vision import resnet50_v1
@@ -158,7 +156,14 @@ def evaluate_accuracy(data_iterator, net):
 def metric_str(names, accs):
     return ', '.join(['%s=%f'%(name, acc) for name, acc in zip(names, accs)])
 
+def log(text, f):
+    print(text)
+    print(text, file=f)
+    f.flush()
+
 def train_util(net, train_iter, test_iter, loss_fn, trainer, ctx, epochs, batch_size):
+    f = open("/data/training.csv", "w")
+    log("Epoch\tBatch\tSpeed\tTraining Accuracy\tTest Accuracy\tValidation Accuracy", f)
     metric = mx.metric.create(['acc'])
     for epoch in range(epochs):
         for i, (data, label) in enumerate(train_iter):
@@ -183,14 +188,21 @@ def train_util(net, train_iter, test_iter, loss_fn, trainer, ctx, epochs, batch_
             #  Keep a moving average of the losses
             metric.update([label], [output])
             names, accs = metric.get()
-            print('[Epoch %d Batch %d] speed: %f samples/s, training: %s'%(epoch, i, batch_size/(time.time()-st), metric_str(names, accs)))
+            log('%d\t%d\t%f\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0])), f)
             if i%100 == 0:
                 net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
                 net.save_parameters('/data/checkpoints/%d-%d.params'%(epoch, i))
-        train_acc = evaluate_accuracy(train_iter, net)
-        test_acc = evaluate_accuracy(test_iter, net)
-        print("Epoch %s | training_acc %s | test_acc %s " % (epoch, train_acc, test_acc))
 
+                train_acc = evaluate_accuracy(train_iter, net)
+                test_acc = evaluate_accuracy(test_iter, net)
+                validation_acc = evaluate_accuracy(validation_iter, net)
+
+                log('%d\t%d\t%f\t%s\t%s\t%s\t%s'%(epoch, i, batch_size/(time.time()-st), train_acc, test_acc, validation_acc), f)
+#               print("%s\t%d\t%s | test_acc %s " % (epoch, i, train_acc, test_acc), file = f)
+
+        net.collect_params().save('/data/checkpoints/%d.params'%(epoch))
+        net.save_parameters('/data/checkpoints/%d.params'%(epoch))
+    f.close()
 
 def train_model(net, ctx, 
           batch_size=64, epochs=10, learning_rate=0.01, wd=0.001):

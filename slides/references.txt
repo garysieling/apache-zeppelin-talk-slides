@@ -1,0 +1,3 @@
+https://www.slideshare.net/AmazonWebServices/optimizing-training-on-apache-mxnet
+https://mxnet.incubator.apache.org/versions/master/tutorials/gluon/data_augmentation.html
+

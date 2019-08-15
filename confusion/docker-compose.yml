@@ -1,14 +1,16 @@
-version: '3.3'
+version: '2.4'
 
 services:
   server:
     image: zeppelin
+    #runtime: nvidia
     environment:
       ZEPPELIN_PORT: 8080
       ZEPPELIN_JAVA_OPTS: >-
         -Dspark.driver.memory=1g
         -Dspark.executor.memory=2g
       MASTER: local[*]
+      #NVIDIA_VISIBLE_DEVICES: all
     ports:
       - 8080:8080
     volumes:

@@ -15,6 +15,8 @@ services:
         -Dspark.driver.memory=1g
         -Dspark.executor.memory=2g
       MASTER: local[*]
+      NVIDIA_VISIBLE_DEVICES: all
+    runtime: nvidia
     ports:
       - 8080:8080
     volumes:

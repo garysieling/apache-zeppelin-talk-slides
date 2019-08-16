@@ -60,11 +60,14 @@ f.close()
 from mxnet.gluon.model_zoo.vision import mobilenet_v2_1_0
 from mxnet.gluon.model_zoo.vision import resnet50_v1
 #from mxnet.gluon.model_zoo.vision import resnet152_v2
-pretrained_net = resnet50_v1(pretrained=True)
+#pretrained_net = resnet50_v1(pretrained=True)
+#initNet = mobilenet_v2_1_0
+initNet = resnet50_v1
+pretrained_net = initNet(pretrained=True)
 print(pretrained_net)
 
 print("classes: " + str(len(train_map)))
-net = resnet50_v1(classes=len(train_map))
+net = initNet(classes=len(train_map))
 
 from mxnet import init
 
@@ -161,19 +164,18 @@ def log(text, f):
     print(text, file=f)
     f.flush()
 
-def train_util(net, train_iter, test_iter, loss_fn, trainer, ctx, epochs, batch_size):
+def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ctx, epochs, batch_size):
     f = open("/data/training.csv", "w")
     log("Epoch\tBatch\tSpeed\tTraining Accuracy\tTest Accuracy\tValidation Accuracy", f)
     metric = mx.metric.create(['acc'])
     for epoch in range(epochs):
         for i, (data, label) in enumerate(train_iter):
+            print(i)
             st = time.time()
-            # ensure context            
-            # print(label)
             
             data = data.as_in_context(ctx)
             label = label.as_in_context(ctx)
-            # normalize images
+
             data = color_normalize(data/255,
                                    mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
                                    std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
@@ -185,31 +187,31 @@ def train_util(net, train_iter, test_iter, loss_fn, trainer, ctx, epochs, batch_
             loss.backward()
             trainer.step(data.shape[0])
             
-            #  Keep a moving average of the losses
             metric.update([label], [output])
             names, accs = metric.get()
             log('%d\t%d\t%f\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0])), f)
-            if i%100 == 0:
+            if i%100 == 0 and i > 0:
+                #train_acc = evaluate_accuracy(train_iter, net)
+                #test_acc = evaluate_accuracy(test_iter, net)
+                validation_acc = evaluate_accuracy(validation_iter, net)
+                print(validation_acc)
+                log('%d\t%d\t%f\t%s\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0]), validation_acc), f)
+#               print("%s\t%d\t%s | test_acc %s " % (epoch, i, train_acc, test_acc), file = f)
                 net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
                 net.save_parameters('/data/checkpoints/%d-%d.params'%(epoch, i))
-
-                train_acc = evaluate_accuracy(train_iter, net)
-                test_acc = evaluate_accuracy(test_iter, net)
-                validation_acc = evaluate_accuracy(validation_iter, net)
-
-                log('%d\t%d\t%f\t%s\t%s\t%s\t%s'%(epoch, i, batch_size/(time.time()-st), train_acc, test_acc, validation_acc), f)
-#               print("%s\t%d\t%s | test_acc %s " % (epoch, i, train_acc, test_acc), file = f)
 
         net.collect_params().save('/data/checkpoints/%d.params'%(epoch))
         net.save_parameters('/data/checkpoints/%d.params'%(epoch))
     f.close()
 
 def train_model(net, ctx, 
-          batch_size=64, epochs=10, learning_rate=0.01, wd=0.001):
+          batch_size=8, epochs=10, learning_rate=0.01, wd=0.001):
     train_data = gluon.data.DataLoader(
         trainIterator, batch_size, shuffle=True)
     test_data = gluon.data.DataLoader(
         testIterator, batch_size)
+    validation_data = gluon.data.DataLoader(
+        validationIterator, batch_size)
 
     net.collect_params().reset_ctx(ctx)
     net.hybridize()
@@ -218,13 +220,13 @@ def train_model(net, ctx,
     trainer = gluon.Trainer(net.collect_params(), 'sgd', {
         'learning_rate': learning_rate, 'wd': wd})
     
-    train_util(net, train_data, test_data, 
+    train_util(net, train_data, test_data, validation_data,
                loss, trainer, ctx, epochs, batch_size)
 
 
 import mxnet as mx
 ctx = mx.cpu()
 epochs = 30
-train_model(net, ctx, batch_size=16, epochs=epochs, learning_rate=0.0005)
+train_model(net, ctx, batch_size=32, epochs=epochs, learning_rate=0.0005)
 
 

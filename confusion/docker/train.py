@@ -1,5 +1,27 @@
 from mxnet import gluon
 from mxnet import nd
+from mxboard import SummaryWriter
+import argparse
+import logging
+
+parser = argparse.ArgumentParser(description='Appliance Recognizer')
+parser.add_argument('--batch-size', type=int, default=100,
+                    help='batch size for training and testing (default: 100)')
+parser.add_argument('--epochs', type=int, default=10,
+                    help='number of epochs to train (default: 10)')
+parser.add_argument('--lr', type=float, default=0.1,
+                    help='learning rate (default: 0.1)')
+parser.add_argument('--momentum', type=float, default=0.9,
+                    help='SGD momentum (default: 0.9)')
+parser.add_argument('--cuda', action='store_true', default=False,
+                    help='Train on GPU with CUDA')
+parser.add_argument('--log-interval', type=int, default=100, metavar='N',
+                    help='how many batches to wait before logging training status')
+
+opt = parser.parse_args()
+
+sw = SummaryWriter(logdir='/data/logs', flush_secs=5)
+logging.basicConfig(level=logging.DEBUG)
 
 import os
 idx = 0
@@ -85,7 +107,7 @@ train_augs = [
     image.LightingAug(0.5, eigval, eigvec),
     image.BrightnessJitterAug(.3),
     image.HueJitterAug(.05),
-    image.ResizeAug(224)
+    image.ForceResizeAug((224, 224))
 ]
 
 test_augs = [
@@ -93,7 +115,7 @@ test_augs = [
 #    image.LightingAug(1, eigval, eigvec),
 #    image.BrightnessJitterAug(.3),
 #    image.HueJitterAug(.05),
-    image.ResizeAug(224),
+    image.ForceResizeAug(224),
     image.CenterCropAug((224, 224))
 ]
 
@@ -151,6 +173,7 @@ def evaluate_accuracy(data_iterator, net):
         data = color_normalize(data/255,
                                mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
                                std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
+        data = data.clip(0, 1)
         output = net(data)
         prediction = nd.argmax(output, axis=1)
         acc.update(preds=prediction, labels=label)
@@ -165,6 +188,7 @@ def log(text, f):
     f.flush()
 
 def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ctx, epochs, batch_size):
+    global_step = 0
     f = open("/data/training.csv", "w")
     log("Epoch\tBatch\tSpeed\tTraining Accuracy\tTest Accuracy\tValidation Accuracy", f)
     metric = mx.metric.create(['acc'])
@@ -179,10 +203,18 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
             data = color_normalize(data/255,
                                    mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
                                    std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
-            
+
+            data = data.clip(0, 1)
+
+            if epoch == 0:
+                sw.add_image('appliances_minibatch_' + str(i), data.reshape((opt.batch_size, 1, 224, 224)), epoch)
+
             with autograd.record():
                 output = net(data)
                 loss = loss_fn(output, label)
+
+            sw.add_scalar(tag='cross_entropy', value=loss.mean().asscalar(), global_step=global_step)
+            global_step += 1
 
             loss.backward()
             trainer.step(data.shape[0])
@@ -190,6 +222,8 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
             metric.update([label], [output])
             names, accs = metric.get()
             log('%d\t%d\t%f\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0])), f)
+
+
             if i%100 == 0 and i > 0:
                 #train_acc = evaluate_accuracy(train_iter, net)
                 #test_acc = evaluate_accuracy(test_iter, net)
@@ -200,8 +234,30 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
                 net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
                 net.save_parameters('/data/checkpoints/%d-%d.params'%(epoch, i))
 
+        if epoch == 0:
+            sw.add_graph(net)
+
+        grads = [i.grad() for i in net.collect_params().values()]
+        assert len(grads) == len(param_names)
+        # logging the gradients of parameters for checking convergence
+        for i, name in enumerate(param_names):
+            sw.add_histogram(tag=name, values=grads[i], global_step=epoch, bins=1000)
+
+        name, train_acc = metric.get()
+        print('[Epoch %d] Training: %s=%f' % (epoch, name, train_acc))
+        # logging training accuracy
+        sw.add_scalar(tag='accuracy_curves', value=('train_acc', train_acc), global_step=epoch)
+
+        name, val_acc = test(ctx)
+        print('[Epoch %d] Validation: %s=%f' % (epoch, name, val_acc))
+        # logging the validation accuracy
+        sw.add_scalar(tag='accuracy_curves', value=('valid_acc', val_acc), global_step=epoch)
+
+
         net.collect_params().save('/data/checkpoints/%d.params'%(epoch))
         net.save_parameters('/data/checkpoints/%d.params'%(epoch))
+    sw.export_scalars('scalar_dict.json')
+    sw.close()
     f.close()
 
 def train_model(net, ctx, 
@@ -225,8 +281,14 @@ def train_model(net, ctx,
 
 
 import mxnet as mx
-ctx = mx.cpu()
+
+ctx = None
+if opt.cuda:
+    ctx = mx.gpu(0)
+else:
+    ctx = mx.cpu()
+
 epochs = 30
-train_model(net, ctx, batch_size=32, epochs=epochs, learning_rate=0.0005)
+train_model(net, ctx, batch_size=opt.batch_size, epochs=opt.epochs, learning_rate=opt.lr)
 
 

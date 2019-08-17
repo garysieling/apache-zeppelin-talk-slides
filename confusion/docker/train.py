@@ -115,7 +115,7 @@ test_augs = [
 #    image.LightingAug(1, eigval, eigvec),
 #    image.BrightnessJitterAug(.3),
 #    image.HueJitterAug(.05),
-    image.ForceResizeAug(224),
+    image.ForceResizeAug((224, 224)),
     image.CenterCropAug((224, 224))
 ]
 
@@ -125,6 +125,7 @@ def transform(data, label, augs):
     for aug in augs:
         data = aug(data)
     data = nd.transpose(data, (2,0,1))
+
     return data, nd.array([label]).asscalar().astype('float32')
 
 from mxnet.gluon.data.vision import ImageFolderDataset
@@ -173,7 +174,6 @@ def evaluate_accuracy(data_iterator, net):
         data = color_normalize(data/255,
                                mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
                                std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
-        data = data.clip(0, 1)
         output = net(data)
         prediction = nd.argmax(output, axis=1)
         acc.update(preds=prediction, labels=label)
@@ -204,10 +204,9 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
                                    mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
                                    std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
 
-            data = data.clip(0, 1)
-
             if epoch == 0:
-                sw.add_image('appliances_minibatch_' + str(i), data.reshape((opt.batch_size, 1, 224, 224)), epoch)
+                img = data.clip(0, 1)
+                sw.add_image('appliances_minibatch_' + str(i), img.reshape((opt.batch_size, 1, 224, 224)), epoch)
 
             with autograd.record():
                 output = net(data)

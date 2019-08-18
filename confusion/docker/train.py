@@ -194,7 +194,7 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
     metric = mx.metric.create(['acc'])
     for epoch in range(epochs):
         for i, (data, label) in enumerate(train_iter):
-            print(i)
+            print("Epoch " + str(epoch) + ", Iteration " + str(i))
             st = time.time()
             
             data = data.as_in_context(ctx)
@@ -227,7 +227,6 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
                 #train_acc = evaluate_accuracy(train_iter, net)
                 #test_acc = evaluate_accuracy(test_iter, net)
                 validation_acc = evaluate_accuracy(validation_iter, net)
-                print(validation_acc)
                 log('%d\t%d\t%f\t%s\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0]), validation_acc), f)
 #               print("%s\t%d\t%s | test_acc %s " % (epoch, i, train_acc, test_acc), file = f)
                 net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
@@ -236,38 +235,42 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
         if epoch == 0:
             sw.add_graph(net)
 
-        grads = [i.grad() for i in net.collect_params().values()]
-        assert len(grads) == len(param_names)
+        params = net.collect_params()
+        #grads = [i.grad() for i in net.collect_params().values() if i.grad_req != 'null']
+        #assert len(grads) == len(param_names)
         # logging the gradients of parameters for checking convergence
-        for i, name in enumerate(param_names):
-            sw.add_histogram(tag=name, values=grads[i], global_step=epoch, bins=1000)
+        for name in params:
+            grad = params[name].data()
+            sw.add_histogram(tag=name, values=grad, global_step=epoch, bins=1000)
 
         name, train_acc = metric.get()
-        print('[Epoch %d] Training: %s=%f' % (epoch, name, train_acc))
-        # logging training accuracy
-        sw.add_scalar(tag='accuracy_curves', value=('train_acc', train_acc), global_step=epoch)
+        print('[Epoch %d] Training: %s=%f' % (epoch, name[0], train_acc[0]))
+        sw.add_scalar(tag='accuracy_curves', value=('train_acc', train_acc[0]), global_step=epoch)
 
-        name, val_acc = test(ctx)
-        print('[Epoch %d] Validation: %s=%f' % (epoch, name, val_acc))
+        validation_acc = evaluate_accuracy(validation_iter, net)
+        print('[Epoch %d] Validation: %s=%f' % (epoch, 'validation_acc', validation_acc))
         # logging the validation accuracy
-        sw.add_scalar(tag='accuracy_curves', value=('valid_acc', val_acc), global_step=epoch)
+        sw.add_scalar(tag='accuracy_curves', value=('validation_acc', validation_acc), global_step=epoch)
 
 
         net.collect_params().save('/data/checkpoints/%d.params'%(epoch))
         net.save_parameters('/data/checkpoints/%d.params'%(epoch))
+
     sw.export_scalars('scalar_dict.json')
     sw.close()
     f.close()
 
 def train_model(net, ctx, 
           batch_size=8, epochs=10, learning_rate=0.01, wd=0.001):
+    print("Creating data iterators")
     train_data = gluon.data.DataLoader(
-        trainIterator, batch_size, shuffle=True)
+        trainIterator, batch_size, shuffle=True, num_workers=4)
     test_data = gluon.data.DataLoader(
-        testIterator, batch_size)
+        testIterator, batch_size, num_workers=4)
     validation_data = gluon.data.DataLoader(
-        validationIterator, batch_size)
+        validationIterator, batch_size, num_workers=4)
 
+    print("Network setup")
     net.collect_params().reset_ctx(ctx)
     net.hybridize()
     
@@ -275,6 +278,7 @@ def train_model(net, ctx,
     trainer = gluon.Trainer(net.collect_params(), 'sgd', {
         'learning_rate': learning_rate, 'wd': wd})
     
+    print("Starting training")
     train_util(net, train_data, test_data, validation_data,
                loss, trainer, ctx, epochs, batch_size)
 
@@ -287,7 +291,6 @@ if opt.cuda:
 else:
     ctx = mx.cpu()
 
-epochs = 30
 train_model(net, ctx, batch_size=opt.batch_size, epochs=opt.epochs, learning_rate=opt.lr)
 
 

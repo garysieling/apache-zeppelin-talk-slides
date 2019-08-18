@@ -1,0 +1,63 @@
+{
+  "paragraphs": [
+    {
+      "text": "%python\n\nimport mxnet as mx\nfrom mxboard import SummaryWriter\n\n\nwith SummaryWriter(logdir\u003d\u0027/data/logs\u0027) as sw:\n    for i in range(10):\n        # create a normal distribution with fixed mean and decreasing std\n        data \u003d mx.nd.normal(loc\u003d0, scale\u003d10.0/(i+1), shape\u003d(10, 3, 8, 8))\n        sw.add_histogram(tag\u003d\u0027norml_dist\u0027, values\u003ddata, bins\u003d200, global_step\u003di)\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-16 19:51:25.687",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1565985009028_-498530866",
+      "id": "20190816-195009_1442548825",
+      "dateCreated": "2019-08-16 19:50:09.028",
+      "dateStarted": "2019-08-16 19:51:25.733",
+      "dateFinished": "2019-08-16 19:51:29.341",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1565985011236_363975717",
+      "id": "20190816-195011_841873477",
+      "dateCreated": "2019-08-16 19:50:11.236",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "test-tensorboard",
+  "id": "2EMH2R4SJ",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "python:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

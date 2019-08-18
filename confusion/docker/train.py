@@ -171,9 +171,11 @@ def evaluate_accuracy(data_iterator, net):
     for i, (data, label) in enumerate(data_iterator):
         data = data.as_in_context(ctx)
         label = label.as_in_context(ctx)
-        data = color_normalize(data/255,
-                               mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
-                               std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
+        #data = color_normalize(data/255,
+        #                       mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
+        #                       std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
+        data = data / 255
+
         output = net(data)
         prediction = nd.argmax(output, axis=1)
         acc.update(preds=prediction, labels=label)
@@ -201,14 +203,15 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
             data = data.as_in_context(ctx)
             label = label.as_in_context(ctx)
 
-            data = color_normalize(data/255,
-                                   mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
-                                   std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
+            #data = color_normalize(data/255,
+            #                       mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
+            #                       std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
 
-            if epoch == 0:
+            data = data / 255
+            if epoch == 0 and i < 100:
                 print("Recording sample images")
                 img = data.clip(0, 1)
-                sw.add_image('appliances_minibatch_' + str(epoch) + '_' + str(i), img.reshape((opt.batch_size, 1, 224, 224)), epoch)
+                sw.add_image('appliances_minibatch_' + str(epoch) + '_' + str(i), img.reshape((opt.batch_size, 3, 224, 224)), epoch)
 
             print("Computing loss")
             with autograd.record():

@@ -193,6 +193,7 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
     log("Epoch\tBatch\tSpeed\tTraining Accuracy\tTest Accuracy\tValidation Accuracy", f)
     metric = mx.metric.create(['acc'])
     for epoch in range(epochs):
+        print("Starting epoch " + str(epoch))
         for i, (data, label) in enumerate(train_iter):
             print("Epoch " + str(epoch) + ", Iteration " + str(i))
             st = time.time()
@@ -205,25 +206,31 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
                                    std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
 
             if epoch == 0:
+                print("Recording sample images")
                 img = data.clip(0, 1)
-                sw.add_image('appliances_minibatch_' + str(i), img.reshape((opt.batch_size, 1, 224, 224)), epoch)
+                sw.add_image('appliances_minibatch_' + str(epoch) + '_' + str(i), img.reshape((opt.batch_size, 1, 224, 224)), epoch)
 
+            print("Computing loss")
             with autograd.record():
                 output = net(data)
                 loss = loss_fn(output, label)
 
+            print("Saving cross_entropy")
             sw.add_scalar(tag='cross_entropy', value=loss.mean().asscalar(), global_step=global_step)
             global_step += 1
 
+            print("Backpropagation")
             loss.backward()
             trainer.step(data.shape[0])
             
+            print("Updating metrics")
             metric.update([label], [output])
             names, accs = metric.get()
             log('%d\t%d\t%f\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0])), f)
 
 
             if i%100 == 0 and i > 0:
+                print("Computing periodic metrics")
                 #train_acc = evaluate_accuracy(train_iter, net)
                 #test_acc = evaluate_accuracy(test_iter, net)
                 validation_acc = evaluate_accuracy(validation_iter, net)
@@ -233,8 +240,10 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
                 net.save_parameters('/data/checkpoints/%d-%d.params'%(epoch, i))
 
         if epoch == 0:
+            print("Saving graph")
             sw.add_graph(net)
 
+        print("Saving histogram")
         params = net.collect_params()
         #grads = [i.grad() for i in net.collect_params().values() if i.grad_req != 'null']
         #assert len(grads) == len(param_names)
@@ -243,6 +252,7 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
             grad = params[name].data()
             sw.add_histogram(tag=name, values=grad, global_step=epoch, bins=1000)
 
+        print("Logging metrics")
         name, train_acc = metric.get()
         print('[Epoch %d] Training: %s=%f' % (epoch, name[0], train_acc[0]))
         sw.add_scalar(tag='accuracy_curves', value=('train_acc', train_acc[0]), global_step=epoch)
@@ -252,9 +262,10 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
         # logging the validation accuracy
         sw.add_scalar(tag='accuracy_curves', value=('validation_acc', validation_acc), global_step=epoch)
 
-
+        print("Saving checkpoint")
         net.collect_params().save('/data/checkpoints/%d.params'%(epoch))
         net.save_parameters('/data/checkpoints/%d.params'%(epoch))
+        print("Checkpoint saved")
 
     sw.export_scalars('scalar_dict.json')
     sw.close()
@@ -264,11 +275,11 @@ def train_model(net, ctx,
           batch_size=8, epochs=10, learning_rate=0.01, wd=0.001):
     print("Creating data iterators")
     train_data = gluon.data.DataLoader(
-        trainIterator, batch_size, shuffle=True, num_workers=4)
+        trainIterator, batch_size, shuffle=True)
     test_data = gluon.data.DataLoader(
-        testIterator, batch_size, num_workers=4)
+        testIterator, batch_size)
     validation_data = gluon.data.DataLoader(
-        validationIterator, batch_size, num_workers=4)
+        validationIterator, batch_size)
 
     print("Network setup")
     net.collect_params().reset_ctx(ctx)

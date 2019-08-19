@@ -245,9 +245,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%sh\ncurl -vX POST http://localhost:8080/api/notebook/import -d @/tmp/note.json --header \"Content-Type: application/json",
+      "text": "%sh\n\nID\u003d2EH5DN4W9\n\ncurl -o  /tmp/note.json https://raw.githubusercontent.com/garysieling/apache-zeppelin-talk-slides/master/confusion/notebooks/$ID/note.json \ncurl -vX POST http://localhost:8080/api/notebook/import -d @/tmp/note.json --header \"Content-Type: application/json",
       "user": "anonymous",
-      "dateUpdated": "2019-07-10 02:13:43.610",
+      "dateUpdated": "2019-08-19 16:35:47.670",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,

@@ -93,6 +93,22 @@
       "dateCreated": "2019-08-20 17:41:35.321",
       "status": "READY",
       "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-20 19:51:40.613",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1566330700612_-654130942",
+      "id": "20190820-195140_1884104838",
+      "dateCreated": "2019-08-20 19:51:40.612",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
     }
   ],
   "name": "Bash to Scala",

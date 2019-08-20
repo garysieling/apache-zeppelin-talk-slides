@@ -25,13 +25,8 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section><h1>Apache Zeppelin</h1></section>
-				<section>
-          <h1>Gary Sieling</h1> 
-          <p>Element 84</p>
-          <p>@garysieling</p>
-          <p>gary.sieling@gmail.com</p>
-        </section>
+		
+		<section><h1>Apache Zeppelin</h1></section>
 		
 		<section>
           <p><img src="e84a.png" /></p>
@@ -59,12 +54,12 @@
 
 		<section>
 			<h3>Data visualizer</h3>
-			<img src="slides/chart.png" />
+			<img src="slides/table-trigger.png" />
 		</section>
-
+		
 		<section>
 			<h3>Data visualizer</h3>
-			<img src="slides/table-trigger.png" />
+			<img src="slides/chart.png" />
 		</section>
 		
 		<section>
@@ -112,6 +107,13 @@
 				<li>Reverse image search</li>
 				<li>No good datasets</li>			
 			</ul>
+		</section>
+
+		<section>
+			<video width="960" height="720" controls autoplay repeat>
+				<source src="slides/demo_after-7.mp4" type="video/mp4">
+				<a href="https://youtu.be/aLPYIn_YnjM">https://youtu.be/aLPYIn_YnjM</a>
+			</video>	
 		</section>
 		
 		<section>
@@ -192,6 +194,14 @@
 		</section>
 		
 		<section>
+			<img src="slides/asbestos.png" />
+		</section>
+	
+		<section>
+			<img src="slides/fire-damage.png" />
+		</section>	
+
+		<section>
 			<img src="slides/sump_pump.gif" />
 		</section>
 		
@@ -213,21 +223,9 @@
 		</section>
 
 		<section>
-			<img src="slides/scala-furnace.png" />
-		</section>
-
-		<section>
-			<h3>When does this work?</h3>
-			<ul>
-				<li>When people can see differences</li>
-				<li>May only be advisory</li>
-			</ul>
-			<img src="slides/colonoscopy-paper.png" />
-		</section>		
-
-		<section>
 			<h3>Debugging</h3>
 			<ul>
+				<li>Run end-to-end with a small dataset</li>
 				<li>Debug every step</li>
 				<li>Ability to restart from a known point</li>
 			</ul>
@@ -236,6 +234,10 @@
 		<section>
 			<h3>Spot check tags</h3>
 			<img src="slides/spot-check-tags.png" />
+		</section>
+
+		<section>
+			<img src="slides/scala-furnace.png" />
 		</section>
 
 		<section>
@@ -249,6 +251,16 @@
 		</section>
 
 		<section>
+			<h3>Tag an image</h3>
+			<img src="slides/prediction-example.png" />
+		</section>
+
+		<section>
+			<h3>Confusion Matrix</h3>
+			<img src="slides/confusion.png" />
+		</section>
+
+		<section>
 			<h3>Read a TSV file</h3>
 			<img src="slides/read-tsv.png" />
 		</section>
@@ -258,14 +270,13 @@
 			<img src="slides/visualize-tsv.png" />
 		</section>
 
-		<section>
-			<h3>Tag an image</h3>
-			<img src="slides/prediction-example.png" />
-		</section>
+		<!--<section>
+			<img src="./slides/accuracy_curves.png" />
+		</section>-->
 
 		<section>
-			<img src="./slides/accuracy_curves.png" />
-		</section>
+			<img src="./slides/11.png" />
+		</section>	
 
 		<section>
 			<h3>Manual Validation (863 entries)</h3>
@@ -288,61 +299,51 @@
 		<section>
 			<img src="./slides/9.png" />
 		</section>
-		
-		<section>
-			<img src="./slides/11.png" />
-		</section>	
-
-		<section>
-			<h3>Confusion Matrix</h3>
-			<img src="slides/confusion.png" />
-		</section>
-	
-		<section>
+			
+		<!--<section>
 			<img src="./slides/images.png" />
-		</section>
+		</section>-->
 	
 		<section>
 			<h3>Reproduceability</h3>
 			<ul>
-				<li>App to upload to S3</li>
-				<li>Debugging at every step</li>
-				<li>Dockerized Zeppelin for Python dependencies</li>
+				<li>Notebook lets you build a world around your problem</li>
+				<li>Dockerized Scripts</li>
 				<li>Upload output to S3</li>
 				<li>Upload a testing notebook to S3</li>
 			</ul>
 		</section>
 
 		<section>
+			<h3>MXNet + Tensorboard</h3>
 			<img src="./slides/13.png" />
 		</section>
 	
+		<section>
+			<h3>When does image recognition work?</h3>
+			<ul>
+				<li>When people can see differences</li>
+				<li>May only be advisory</li>
+			</ul>
+			<img src="slides/colonoscopy-paper.png" />
+		</section>		
+		
 		<section>
 			<h3>Lessons Learned</h3>
 			<ul>
 				<li>Do some manual tagging (challenge data vs. real world problems)</li>
 				<li>Hold out a validation set that matches the "business" problem</li>
-				<li>Pre-trained models: ymmv</li>
+				<!--<li>Pre-trained models: ymmv</li>-->
 			</ul>
 		</section>
 
 		<section>
-			<h3>Challenges</h3>
+			<h3>Next steps</h3>
 			<ul>
-				<li>Tag taxonomy</li>
-				<li>Rare / out of date objects</li>
-				<li>Accessibility of sensors</li>
-				<li>Non-existence of objects</li>
+				<li>Cloud scaling</li>
+				<li>New Sensors</li>
 				<li>Video flicker</li>
 			</ul>
-		</section>				
-
-		<section>
-			<img src="slides/asbestos.png" />
-		</section>
-		
-		<section>
-			<img src="slides/fire-damage.png" />
 		</section>	
 		<!--
 			TODO:
@@ -367,6 +368,13 @@
 			</div>
 		</div>-->
 
+		<section>
+			<h1>Gary Sieling</h1> 
+			<p>Element 84</p>
+			<p>@garysieling</p>
+			<p>gary.sieling@gmail.com</p>
+		</section>
+		
 		<script src="js/reveal.js"></script>
 
 		<script>

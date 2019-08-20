@@ -3,6 +3,7 @@ from mxnet import nd
 from mxboard import SummaryWriter
 import argparse
 import logging
+import datetime
 
 parser = argparse.ArgumentParser(description='Appliance Recognizer')
 parser.add_argument('--batch-size', type=int, default=100,
@@ -80,11 +81,11 @@ for k in sample_map:
 f.close()
 
 from mxnet.gluon.model_zoo.vision import mobilenet_v2_1_0
-from mxnet.gluon.model_zoo.vision import resnet50_v1
+#from mxnet.gluon.model_zoo.vision import resnet50_v1
 #from mxnet.gluon.model_zoo.vision import resnet152_v2
 #pretrained_net = resnet50_v1(pretrained=True)
 #initNet = mobilenet_v2_1_0
-initNet = resnet50_v1
+initNet = mobilenet_v2_1_0
 pretrained_net = initNet(pretrained=True)
 print(pretrained_net)
 
@@ -104,17 +105,17 @@ eigvec = [[-0.5675, 0.7192, 0.4009],[-0.5808, -0.0045, -0.8140],[-0.5836, -0.694
 
 train_augs = [
     image.HorizontalFlipAug(0.5),
-    image.LightingAug(0.5, eigval, eigvec),
+    image.LightingAug(1, eigval, eigvec),
     image.BrightnessJitterAug(.3),
     image.HueJitterAug(.05),
     image.ForceResizeAug((224, 224))
 ]
 
 test_augs = [
-#    image.HorizontalFlipAug(0.5),
-#    image.LightingAug(1, eigval, eigvec),
-#    image.BrightnessJitterAug(.3),
-#    image.HueJitterAug(.05),
+    image.HorizontalFlipAug(0.5),
+    image.LightingAug(1, eigval, eigvec),
+    image.BrightnessJitterAug(.3),
+    image.HueJitterAug(.05),
     image.ForceResizeAug((224, 224)),
     image.CenterCropAug((224, 224))
 ]
@@ -171,10 +172,9 @@ def evaluate_accuracy(data_iterator, net):
     for i, (data, label) in enumerate(data_iterator):
         data = data.as_in_context(ctx)
         label = label.as_in_context(ctx)
-        #data = color_normalize(data/255,
-        #                       mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
-        #                       std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
-        data = data / 255
+        data = color_normalize(data/255,
+                               mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
+                               std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
 
         output = net(data)
         prediction = nd.argmax(output, axis=1)
@@ -203,11 +203,10 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
             data = data.as_in_context(ctx)
             label = label.as_in_context(ctx)
 
-            #data = color_normalize(data/255,
-            #                       mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
-            #                       std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
+            data = color_normalize(data/255,
+                                   mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
+                                   std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
 
-            data = data / 255
             if epoch == 0 and i < 100:
                 print("Recording sample images")
                 img = data.clip(0, 1)

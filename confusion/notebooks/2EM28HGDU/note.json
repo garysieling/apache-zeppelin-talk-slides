@@ -1,0 +1,112 @@
+{
+  "paragraphs": [
+    {
+      "text": "%sh \n\nls /data/household",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-20 17:42:38.277",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "demo\nepoch_tested.csv\nindex.html\ninitial\npicker.html\nsample\ntest\ntrain\nvalidation\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1566322737571_-543868847",
+      "id": "20190820-173857_544573372",
+      "dateCreated": "2019-08-20 17:38:57.571",
+      "dateStarted": "2019-08-20 17:42:38.285",
+      "dateFinished": "2019-08-20 17:42:38.300",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nimport sys.process._\n\n\"ls /data/household\".!!",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-20 17:42:44.104",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import sys.process._\nres16: String \u003d\n\"demo\nepoch_tested.csv\nindex.html\ninitial\npicker.html\nsample\ntest\ntrain\nvalidation\n\"\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1566322861752_-118880127",
+      "id": "20190820-174101_340583154",
+      "dateCreated": "2019-08-20 17:41:01.752",
+      "dateStarted": "2019-08-20 17:42:44.113",
+      "dateFinished": "2019-08-20 17:42:44.822",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-20 17:41:35.321",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1566322895320_-1660196899",
+      "id": "20190820-174135_494964873",
+      "dateCreated": "2019-08-20 17:41:35.321",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Bash to Scala",
+  "id": "2EM28HGDU",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "python:shared_process": [],
+    "sh:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

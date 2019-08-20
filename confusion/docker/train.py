@@ -20,7 +20,7 @@ parser.add_argument('--log-interval', type=int, default=100, metavar='N',
 
 opt = parser.parse_args()
 
-sw = SummaryWriter(logdir='/data/logs', flush_secs=5)
+sw = SummaryWriter(logdir='/data/logs-' + datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"), flush_secs=5)
 logging.basicConfig(level=logging.DEBUG)
 
 import os
@@ -239,8 +239,10 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
                 validation_acc = evaluate_accuracy(validation_iter, net)
                 log('%d\t%d\t%f\t%s\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0]), validation_acc), f)
 #               print("%s\t%d\t%s | test_acc %s " % (epoch, i, train_acc, test_acc), file = f)
-                net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
-                net.save_parameters('/data/checkpoints/%d-%d.params'%(epoch, i))
+                #net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
+                #net.save_parameters('/data/checkpoints/%d-%d.params'%(epoch, i))
+                net.hybridize()
+                net.export("/data/checkpoints/%d-%d.params-symbol.json")
 
         if epoch == 0:
             print("Saving graph")

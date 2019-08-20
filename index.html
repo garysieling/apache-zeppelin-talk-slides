@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Machine Learning in Apache Zeppelin</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -78,22 +78,23 @@
 		</section>
 
 		<section>
-			<img src="slides/git-secrets.png" />
+			<img src="slides/import.png" />
 		</section>
 		
 		<section>
-			<img src="slides/import.png" />
+			<img src="slides/git-secrets.png" />
 		</section>
 
 		<section>
-			<h3>Why mxnet?</h3>
+			<h3>Environment setup</h3>
 			<ul>
-				<li>AWS support</li>
-				<li>Multi-language</li>
-				<li>DeepLens</li>
+				<li>Zeppelin Docker (Java / Jetty)</li>
+				<li>Pre-installed python libraries (opencv, mxnet)</li>
+				<li>Git Volume</li>
+				<li>Data Volume</li>
 			</ul>
 		</section>
-			 
+					 
 		<section>
 			<h3>Identifying household objects</h3>
 			<ul>
@@ -102,15 +103,30 @@
 				<li>No good datasets</li>			
 			</ul>
 		</section>
-
+		
 		<section>
 			<img src="slides/md.png" />
+		</section>
+
+		<section>
+			<h3>Infrastructure</h3>
+			<ul>
+				<li>App to record videos</li>
+				<li>Stock Videos stored on S3</li>
+				<li>Pull videos to training machine</li>
+				<li>Extract frames with ffmpeg</li>
+				<li>Train with mxnet / gluon</li>
+			</ul>
 		</section>
 
 		<section>
 			<img src="slides/shell.png" />
 		</section>
 	
+		<section>
+			<h3>ETL process</h3>
+		</section>
+
 		<section>
 			<img src="slides/python-tags.png" />
 		</section>
@@ -132,6 +148,23 @@
 		</section>
 
 		<section>
+			<h3>Decision Points</h3>
+		</section>		
+
+		<section>
+			<h3>Why mxnet?</h3>
+			<ul>
+				<li>AWS support</li>
+				<li>Multi-language</li>
+				<li>DeepLens</li>
+			</ul>
+		</section>
+
+		<section>
+			<img src="./slides/12.png" />
+		</section>
+
+		<section>
 			<h3>Image Sources</h3>
 			<ul>
 				<li>Bing API</li>
@@ -143,13 +176,13 @@
 		<section>
 			<img src="slides/cherry-flooring.png" />
 		</section>
-	
-		<section>
-			<img src="slides/sump_pump.gif" />
-		</section>
-
+		
 		<section>
 			<img src="slides/smoke-detector-stock-images.png" />
+		</section>
+		
+		<section>
+			<img src="slides/sump_pump.gif" />
 		</section>
 		
 		<section>
@@ -166,17 +199,9 @@
 		</section>
 		
 		<section>
-			<img src="./slides/12.png" />
-		</section>
-
-		<section>
 			<img src="slides/pipes.png" />
 		</section>
 
-		<section>
-			<img src="slides/asbestos.png" />
-		</section>
-		
 		<section>
 			<img src="slides/scala-furnace.png" />
 		</section>
@@ -229,6 +254,11 @@
 		</section>
 
 		<section>
+			<h3>Manual Validation (863 entries)</h3>
+			<img src="slides/validation.png" />
+		</section>
+
+		<section>
 			<h3>Augmentation with mxnet filters</h3>
 			<img src="slides/16.png" />
 		</section> 
@@ -274,14 +304,33 @@
 		</section>
 
 		<section>
-			<h3>Challenges</h3>
+			<h3>Lessons Learned</h3>
 			<ul>
-				<li>Rare / out of date objects</li>
-				<li>Video flicker</li>
+				<li>Do some manual tagging (challenge data vs. real world problems)</li>
+				<li>Hold out a validation set that matches the "business" problem</li>
+				<li>Pre-trained models: ymmv</li>
 			</ul>
 		</section>
-				
 
+
+		<section>
+			<h3>Challenges</h3>
+			<ul>
+				<li>Tag taxonomy</li>
+				<li>Rare / out of date objects</li>
+				<li>Accessibility of sensors</li>
+				<li>Non-existence of objects</li>
+				<li>Video flicker</li>
+			</ul>
+		</section>				
+
+		<section>
+			<img src="slides/asbestos.png" />
+		</section>
+		
+		<section>
+			<img src="slides/fire-damage.png" />
+		</section>	
 		<!--
 			TODO:
 				- Talk about debugging APIs
@@ -320,5 +369,54 @@
 				]
 			});
 		</script>
+
+
+<style type="text/css">
+    /* 1. Style header/footer <div> so they are positioned as desired. */
+    #header-left {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+    }
+    #header-right {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+    }
+    #footer-left {
+        position: absolute;
+        bottom: 2%;
+        left: 2%;
+    }
+    #footer-right {
+        position: absolute;
+        bottom: 3%;
+        right: 3%;
+    }
+</style>
+
+<!-- 2. Create hidden header/footer <div> -->
+<div id="hidden" style="display:none;">
+    <div id="header">
+        <div id="header-left"></div>
+		<div id="header-right"></div>
+		<div id="footer-left"></div>
+        <div id="footer-right">@garysieling</div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+    var header = $('#header').html();
+    if ( window.location.search.match( /print-pdf/gi ) ) {
+        Reveal.addEventListener( 'ready', function( event ) {
+            $('.slide-background').append(header);
+        });
+    }
+    else {
+        $('div.reveal').append(header);
+   }
+</script>
 	</body>
 </html>

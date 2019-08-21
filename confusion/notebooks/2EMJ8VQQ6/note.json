@@ -773,7 +773,7 @@
     {
       "text": "%python\nprint(\"%table\")\ne \u003d open(\"/data/epoch_results.csv\", \"r\")\n\nepoch_totals \u003d {}\nepoch_correct \u003d {}\n\nfor line in e:\n    parts \u003d line.split(\"\\t\")\n    \n    epoch \u003d parts[0]\n    \n    if epoch \u003d\u003d \"epoch\":\n        continue\n    \n    if not epoch in epoch_totals:\n        epoch_totals[epoch] \u003d 0\n        epoch_correct[epoch] \u003d 0\n \n    correct \u003d parts[3].strip()\n    \n    epoch_totals[epoch] \u003d epoch_totals[epoch] + 1\n    \n    if correct \u003d\u003d \"1\":\n        epoch_correct[epoch] \u003d epoch_correct[epoch] + 1\n\nprint(\"Epoch\\tTotal\\tRight\\tPercent\")\nfor k in epoch_totals:\n    print(k + \"\\t\" + str(epoch_totals[k]) + \"\\t\" + str(epoch_correct[k]) + \"\\t\" + str( epoch_correct[k] / epoch_totals[k]))\n\ne.close()\n",
       "user": "anonymous",
-      "dateUpdated": "2019-08-21 01:06:08.048",
+      "dateUpdated": "2019-08-21 16:35:35.069",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,

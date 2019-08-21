@@ -232,15 +232,15 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
             log('%d\t%d\t%f\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0])), f)
 
 
-            if i%10 == 0 and i > 0:
+            if i%1 == 0 and i > 0:
                 print("Computing periodic metrics")
                 #train_acc = evaluate_accuracy(train_iter, net)
                 #test_acc = evaluate_accuracy(test_iter, net)
                 validation_acc = evaluate_accuracy(validation_iter, net)
                 log('%d\t%d\t%f\t%s\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0]), validation_acc), f)
 #               print("%s\t%d\t%s | test_acc %s " % (epoch, i, train_acc, test_acc), file = f)
-                net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
-                #net.save_parameters('/data/checkpoints/%d-%d.params'%(epoch, i))
+                #net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
+                net.save_parameters('/data/checkpoints/%d-%d.params'%(epoch, i))
                 #net.hybridize()
                 #net.export("/data/checkpoints/%d-%d.params-symbol.json")
 

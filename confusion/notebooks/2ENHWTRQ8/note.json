@@ -1,0 +1,112 @@
+{
+  "paragraphs": [
+    {
+      "text": "%sh \n\npip3 install keract\npip install keras-mxnet\n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-21 01:49:42.048",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Requirement already satisfied: keract in /usr/local/lib/python3.7/dist-packages (2.6.2)\nRequirement already satisfied: numpy in /usr/local/lib/python3.7/dist-packages (from keract) (1.17.0)\nRequirement already satisfied: keras in /usr/local/lib/python3.7/dist-packages (from keract) (2.2.4)\nRequirement already satisfied: h5py in /usr/local/lib/python3.7/dist-packages (from keras-\u003ekeract) (2.9.0)\nRequirement already satisfied: scipy\u003e\u003d0.14 in /usr/local/lib/python3.7/dist-packages (from keras-\u003ekeract) (1.3.0)\nRequirement already satisfied: pyyaml in /usr/local/lib/python3.7/dist-packages (from keras-\u003ekeract) (5.1)\nRequirement already satisfied: keras-applications\u003e\u003d1.0.6 in /usr/local/lib/python3.7/dist-packages (from keras-\u003ekeract) (1.0.8)\nRequirement already satisfied: keras-preprocessing\u003e\u003d1.0.5 in /usr/local/lib/python3.7/dist-packages (from keras-\u003ekeract) (1.1.0)\nRequirement already satisfied: six\u003e\u003d1.9.0 in /usr/local/lib/python3.7/dist-packages (from keras-\u003ekeract) (1.12.0)\nWARNING: You are using pip version 19.2.1, however version 19.2.2 is available.\nYou should consider upgrading via the \u0027pip install --upgrade pip\u0027 command.\nCollecting keras-mxnet\n  Downloading https://files.pythonhosted.org/packages/08/55/363f4464c864309cbcbad27e9a1475766ff3cbbdc380d6228b838a81fa6e/keras_mxnet-2.2.4.2-py2.py3-none-any.whl (373kB)\nCollecting h5py (from keras-mxnet)\n  Cache entry deserialization failed, entry ignored\n  Downloading https://files.pythonhosted.org/packages/53/08/27e4e9a369321862ffdce80ff1770553e9daec65d98befb2e14e7478b698/h5py-2.9.0-cp27-cp27mu-manylinux1_x86_64.whl (2.8MB)\nRequirement already satisfied (use --upgrade to upgrade): six\u003e\u003d1.9.0 in /opt/conda/lib/python2.7/site-packages (from keras-mxnet)\nRequirement already satisfied (use --upgrade to upgrade): numpy\u003e\u003d1.9.1 in /opt/conda/lib/python2.7/site-packages (from keras-mxnet)\nCollecting keras-applications\u003e\u003d1.0.6 (from keras-mxnet)\n  Cache entry deserialization failed, entry ignored\n  Downloading https://files.pythonhosted.org/packages/21/56/4bcec5a8d9503a87e58e814c4e32ac2b32c37c685672c30bc8c54c6e478a/Keras_Applications-1.0.8.tar.gz (289kB)\nRequirement already satisfied (use --upgrade to upgrade): scipy\u003e\u003d0.14 in /opt/conda/lib/python2.7/site-packages (from keras-mxnet)\nCollecting keras-preprocessing\u003e\u003d1.0.5 (from keras-mxnet)\n  Cache entry deserialization failed, entry ignored\n  Cache entry deserialization failed, entry ignored\n  Downloading https://files.pythonhosted.org/packages/28/6a/8c1f62c37212d9fc441a7e26736df51ce6f0e38455816445471f10da4f0a/Keras_Preprocessing-1.1.0-py2.py3-none-any.whl (41kB)\nRequirement already satisfied (use --upgrade to upgrade): pyyaml in /opt/conda/lib/python2.7/site-packages (from keras-mxnet)\nBuilding wheels for collected packages: keras-applications\n  Running setup.py bdist_wheel for keras-applications: started\n  Running setup.py bdist_wheel for keras-applications: finished with status \u0027done\u0027\n  Stored in directory: /root/.cache/pip/wheels/dd/f2/5d/2689b5547f32c4e258c3b7ccbe7f1d0f2afbb84fb01e830792\nSuccessfully built keras-applications\nInstalling collected packages: h5py, keras-applications, keras-preprocessing, keras-mxnet\nSuccessfully installed h5py-2.9.0 keras-applications-1.0.8 keras-mxnet-2.2.4.2 keras-preprocessing-1.1.0\nYou are using pip version 8.1.2, however version 19.2.2 is available.\nYou should consider upgrading via the \u0027pip install --upgrade pip\u0027 command.\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1566352047460_-373685473",
+      "id": "20190821-014727_437897381",
+      "dateCreated": "2019-08-21 01:47:27.462",
+      "dateStarted": "2019-08-21 01:49:42.057",
+      "dateFinished": "2019-08-21 01:49:51.343",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\nfrom keract import get_activations\nactivations \u003d get_activations(model, x, layer_name)\n\nfrom keract import display_activations\ndisplay_activations(activations, cmap\u003d\"gray\", save\u003dFalse)\n\nfrom keract import display_heatmaps\ndisplay_heatmaps(activations, input_image, save\u003dFalse)\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-21 01:48:49.665",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Traceback (most recent call last):\n  File \"/tmp/zeppelin_python-3808862334288108950.py\", line 307, in \u003cmodule\u003e\n    exec(code, _zcUserQueryNameSpace)\n  File \"\u003cstdin\u003e\", line 1, in \u003cmodule\u003e\n  File \"/usr/local/lib/python3.7/dist-packages/keract/__init__.py\", line 1, in \u003cmodule\u003e\n    from keract.keract import *\n  File \"/usr/local/lib/python3.7/dist-packages/keract/keract.py\", line 1, in \u003cmodule\u003e\n    import keras.backend as K\n  File \"/usr/local/lib/python3.7/dist-packages/keras/__init__.py\", line 3, in \u003cmodule\u003e\n    from . import utils\n  File \"/usr/local/lib/python3.7/dist-packages/keras/utils/__init__.py\", line 6, in \u003cmodule\u003e\n    from . import conv_utils\n  File \"/usr/local/lib/python3.7/dist-packages/keras/utils/conv_utils.py\", line 9, in \u003cmodule\u003e\n    from .. import backend as K\n  File \"/usr/local/lib/python3.7/dist-packages/keras/backend/__init__.py\", line 89, in \u003cmodule\u003e\n    from .tensorflow_backend import *\n  File \"/usr/local/lib/python3.7/dist-packages/keras/backend/tensorflow_backend.py\", line 5, in \u003cmodule\u003e\n    import tensorflow as tf\nModuleNotFoundError: No module named \u0027tensorflow\u0027\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/tmp/zeppelin_python-3808862334288108950.py\", line 319, in \u003cmodule\u003e\n    raise Exception(traceback.format_exc())\nException: Traceback (most recent call last):\n  File \"/tmp/zeppelin_python-3808862334288108950.py\", line 307, in \u003cmodule\u003e\n    exec(code, _zcUserQueryNameSpace)\n  File \"\u003cstdin\u003e\", line 1, in \u003cmodule\u003e\n  File \"/usr/local/lib/python3.7/dist-packages/keract/__init__.py\", line 1, in \u003cmodule\u003e\n    from keract.keract import *\n  File \"/usr/local/lib/python3.7/dist-packages/keract/keract.py\", line 1, in \u003cmodule\u003e\n    import keras.backend as K\n  File \"/usr/local/lib/python3.7/dist-packages/keras/__init__.py\", line 3, in \u003cmodule\u003e\n    from . import utils\n  File \"/usr/local/lib/python3.7/dist-packages/keras/utils/__init__.py\", line 6, in \u003cmodule\u003e\n    from . import conv_utils\n  File \"/usr/local/lib/python3.7/dist-packages/keras/utils/conv_utils.py\", line 9, in \u003cmodule\u003e\n    from .. import backend as K\n  File \"/usr/local/lib/python3.7/dist-packages/keras/backend/__init__.py\", line 89, in \u003cmodule\u003e\n    from .tensorflow_backend import *\n  File \"/usr/local/lib/python3.7/dist-packages/keras/backend/tensorflow_backend.py\", line 5, in \u003cmodule\u003e\n    import tensorflow as tf\nModuleNotFoundError: No module named \u0027tensorflow\u0027\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1566352055679_1885212107",
+      "id": "20190821-014735_1898767511",
+      "dateCreated": "2019-08-21 01:47:35.680",
+      "dateStarted": "2019-08-21 01:48:35.188",
+      "dateFinished": "2019-08-21 01:48:35.208",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-08-21 01:47:58.330",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1566352078330_1424294346",
+      "id": "20190821-014758_459442479",
+      "dateCreated": "2019-08-21 01:47:58.330",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "keract",
+  "id": "2ENHWTRQ8",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "python:shared_process": [],
+    "sh:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

@@ -21,7 +21,7 @@ parser.add_argument('--log-interval', type=int, default=100, metavar='N',
 
 opt = parser.parse_args()
 
-sw = SummaryWriter(logdir='/data/logs-' + datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"), flush_secs=5)
+#sw = SummaryWriter(logdir='/data/logs-' + datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"), flush_secs=5)
 logging.basicConfig(level=logging.DEBUG)
 
 import os
@@ -80,12 +80,13 @@ for k in sample_map:
     print("sample\t" + k + "\t" + str(len(sample_map[k])), file=f)    
 f.close()
 
-from mxnet.gluon.model_zoo.vision import mobilenet_v2_1_0
+#from mxnet.gluon.model_zoo.vision import mobilenet_v2_1_0
+from mxnet.gluon.model_zoo.vision import vgg16
 #from mxnet.gluon.model_zoo.vision import resnet50_v1
 #from mxnet.gluon.model_zoo.vision import resnet152_v2
 #pretrained_net = resnet50_v1(pretrained=True)
 #initNet = mobilenet_v2_1_0
-initNet = mobilenet_v2_1_0
+initNet = vgg16
 pretrained_net = initNet(pretrained=True)
 print(pretrained_net)
 
@@ -207,19 +208,19 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
                                    mean=mx.nd.array([0.485, 0.456, 0.406]).reshape((1,3,1,1)),
                                    std=mx.nd.array([0.229, 0.224, 0.225]).reshape((1,3,1,1)))
 
-            if epoch == 0 and i < 100:
-                print("Recording sample images")
-                img = data.clip(0, 1)
-                sw.add_image('appliances_minibatch_' + str(epoch) + '_' + str(i), img.reshape((opt.batch_size, 3, 224, 224)), epoch)
+            #if epoch == 0 and i < 100:
+            #    print("Recording sample images")
+            #    img = data.clip(0, 1)
+            #    sw.add_image('appliances_minibatch_' + str(epoch) + '_' + str(i), img.reshape((opt.batch_size, 3, 224, 224)), epoch)
 
             print("Computing loss")
             with autograd.record():
                 output = net(data)
                 loss = loss_fn(output, label)
 
-            print("Saving cross_entropy")
-            sw.add_scalar(tag='cross_entropy', value=loss.mean().asscalar(), global_step=global_step)
-            global_step += 1
+            #print("Saving cross_entropy")
+            #sw.add_scalar(tag='cross_entropy', value=loss.mean().asscalar(), global_step=global_step)
+            #global_step += 1
 
             print("Backpropagation")
             loss.backward()
@@ -231,48 +232,48 @@ def train_util(net, train_iter, test_iter, validation_iter, loss_fn, trainer, ct
             log('%d\t%d\t%f\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0])), f)
 
 
-            if i%100 == 0 and i > 0:
+            if i%10 == 0 and i > 0:
                 print("Computing periodic metrics")
                 #train_acc = evaluate_accuracy(train_iter, net)
                 #test_acc = evaluate_accuracy(test_iter, net)
                 validation_acc = evaluate_accuracy(validation_iter, net)
                 log('%d\t%d\t%f\t%s\t%s'%(epoch, i, batch_size/(time.time()-st), str(accs[0]), validation_acc), f)
 #               print("%s\t%d\t%s | test_acc %s " % (epoch, i, train_acc, test_acc), file = f)
-                #net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
+                net.collect_params().save('/data/checkpoints/%d-%d.params'%(epoch, i))
                 #net.save_parameters('/data/checkpoints/%d-%d.params'%(epoch, i))
-                net.hybridize()
-                net.export("/data/checkpoints/%d-%d.params-symbol.json")
+                #net.hybridize()
+                #net.export("/data/checkpoints/%d-%d.params-symbol.json")
 
-        if epoch == 0:
-            print("Saving graph")
-            sw.add_graph(net)
+        #if epoch == 0:
+        #    print("Saving graph")
+        #    sw.add_graph(net)
 
         print("Saving histogram")
         params = net.collect_params()
         #grads = [i.grad() for i in net.collect_params().values() if i.grad_req != 'null']
         #assert len(grads) == len(param_names)
         # logging the gradients of parameters for checking convergence
-        for name in params:
-            grad = params[name].data()
-            sw.add_histogram(tag=name, values=grad, global_step=epoch, bins=1000)
+        #for name in params:
+        #    grad = params[name].data()
+        #    sw.add_histogram(tag=name, values=grad, global_step=epoch, bins=1000)
 
-        print("Logging metrics")
-        name, train_acc = metric.get()
-        print('[Epoch %d] Training: %s=%f' % (epoch, name[0], train_acc[0]))
-        sw.add_scalar(tag='accuracy_curves', value=('train_acc', train_acc[0]), global_step=epoch)
+        #print("Logging metrics")
+        #name, train_acc = metric.get()
+        #print('[Epoch %d] Training: %s=%f' % (epoch, name[0], train_acc[0]))
+        #sw.add_scalar(tag='accuracy_curves', value=('train_acc', train_acc[0]), global_step=epoch)
 
-        validation_acc = evaluate_accuracy(validation_iter, net)
+        #validation_acc = evaluate_accuracy(validation_iter, net)
         print('[Epoch %d] Validation: %s=%f' % (epoch, 'validation_acc', validation_acc))
         # logging the validation accuracy
-        sw.add_scalar(tag='accuracy_curves', value=('validation_acc', validation_acc), global_step=epoch)
+        #sw.add_scalar(tag='accuracy_curves', value=('validation_acc', validation_acc), global_step=epoch)
 
         print("Saving checkpoint")
         net.collect_params().save('/data/checkpoints/%d.params'%(epoch))
         net.save_parameters('/data/checkpoints/%d.params'%(epoch))
         print("Checkpoint saved")
 
-    sw.export_scalars('scalar_dict.json')
-    sw.close()
+    #sw.export_scalars('scalar_dict.json')
+    #sw.close()
     f.close()
 
 def train_model(net, ctx, 
